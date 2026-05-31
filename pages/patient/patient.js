@@ -17,51 +17,22 @@ Page({
       { week: '周三', day: '6/3' }
     ],
     times: ['上午 8:00-12:00', '下午 14:00-17:00'],
-    selectedDept: -1,
-    selectedDate: -1,
-    selectedTime: -1,
-    selectedHospital: '',
-    patientName: '',
-    patientPhone: '',
-    patientDesc: ''
+    selectedDept: -1, selectedDate: -1, selectedTime: -1,
+    selectedHospital: '', patientName: '', patientPhone: '', patientDesc: ''
   },
-
-  onSearchHospital(e) {
-    const keyword = e.detail.value
-    console.log('搜索医院:', keyword)
-  },
-
+  onSearchHospital(e) { console.log('搜索医院:', e.detail.value) },
   selectHospital(e) {
     const id = e.currentTarget.dataset.id
     const hospital = this.data.hospitals.find(h => h.id == id)
     this.setData({ selectedHospital: hospital.name })
     wx.showToast({ title: '已选择: ' + hospital.name, icon: 'none' })
   },
-
-  selectDept(e) {
-    this.setData({ selectedDept: e.currentTarget.dataset.index })
-  },
-
-  selectDate(e) {
-    this.setData({ selectedDate: e.currentTarget.dataset.index })
-  },
-
-  selectTime(e) {
-    this.setData({ selectedTime: e.currentTarget.dataset.index })
-  },
-
-  onInputName(e) {
-    this.setData({ patientName: e.detail.value })
-  },
-
-  onInputPhone(e) {
-    this.setData({ patientPhone: e.detail.value })
-  },
-
-  onInputDesc(e) {
-    this.setData({ patientDesc: e.detail.value })
-  },
-
+  selectDept(e) { this.setData({ selectedDept: e.currentTarget.dataset.index }) },
+  selectDate(e) { this.setData({ selectedDate: e.currentTarget.dataset.index }) },
+  selectTime(e) { this.setData({ selectedTime: e.currentTarget.dataset.index }) },
+  onInputName(e) { this.setData({ patientName: e.detail.value }) },
+  onInputPhone(e) { this.setData({ patientPhone: e.detail.value }) },
+  onInputDesc(e) { this.setData({ patientDesc: e.detail.value }) },
   nextStep() {
     if (this.data.step < 3) {
       this.setData({ step: this.data.step + 1 })
@@ -69,16 +40,11 @@ Page({
       wx.showModal({
         title: '预约成功',
         content: '已收到您的陪诊预约申请',
-        success() {
-          wx.navigateTo({ url: '/pages/orders/orders' })
-        }
+        success() { wx.navigateTo({ url: '/pages/orders/orders' }) }
       })
     }
   },
-
   prevStep() {
-    if (this.data.step > 1) {
-      this.setData({ step: this.data.step - 1 })
-    }
+    if (this.data.step > 1) { this.setData({ step: this.data.step - 1 }) }
   }
 })

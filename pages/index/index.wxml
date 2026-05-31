@@ -22,6 +22,7 @@
   <!-- 角色入口 -->
   <view class="section">
     <text class="section-title">选择您的身份</text>
+    
     <view class="role-card" bindtap="goPatient">
       <view class="role-icon">🏥</view>
       <view class="role-info">
@@ -49,9 +50,8 @@
       <text class="arrow">›</text>
     </view>
   </view>
-</view>
 
-  <!-- 服务优势 -->
+  <!-- 为什么选择我们 -->
   <view class="section">
     <text class="section-title">为什么选择我们</text>
     <view class="advantages">
@@ -68,7 +68,8 @@
       <view class="adv-item">
         <text class="adv-icon">💛</text>
         <text class="adv-title">贴心周到</text>
-        <text class="adv-desc">全程陪同、情绪安抚</text>
+        <text class="adv-desc">全程陪同，情绪安抚</text>
       </view>
     </view>
   </view>
+</view>

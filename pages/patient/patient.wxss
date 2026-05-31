@@ -31,45 +31,38 @@ page { background-color: #f5f7fa; }
 }
 .step-line.active { background: #1aad8a; }
 
-/* 标题 */
 .section-title {
   font-size: 32rpx;
   font-weight: 600;
   color: #333;
   display: block;
   margin-bottom: 20rpx;
+  padding: 0 24rpx;
 }
-
-/* 搜索 */
 .search-input {
   background: #fff;
-  border-radius: 16rpx;
   padding: 20rpx 24rpx;
   font-size: 28rpx;
-  margin-bottom: 20rpx;
+  margin: 0 0 20rpx 0;
+  border-bottom: 2rpx solid #f0f0f0;
 }
-
-/* 医院列表 */
 .hospital-card {
   background: #fff;
-  border-radius: 0;
   padding: 24rpx 24rpx;
   margin-bottom: 2rpx;
   border-bottom: 2rpx solid #f0f0f0;
 }
 .hospital-name { font-size: 30rpx; font-weight: 600; color: #333; }
 .hospital-addr { font-size: 24rpx; color: #999; margin-top: 8rpx; }
-
-/* 标签组 */
 .tag-group {
   display: flex;
   flex-wrap: wrap;
   gap: 16rpx;
+  padding: 0 24rpx;
 }
 .tag {
   background: #fff;
   padding: 16rpx 32rpx;
-  border-radius: 12rpx;
   font-size: 28rpx;
   color: #666;
   border: 2rpx solid #eee;
@@ -79,15 +72,13 @@ page { background-color: #f5f7fa; }
   color: #1aad8a;
   border-color: #1aad8a;
 }
-
-/* 日期 */
 .date-list {
   display: flex;
   gap: 16rpx;
+  padding: 0 24rpx;
 }
 .date-item {
   background: #fff;
-  border-radius: 12rpx;
   padding: 16rpx 24rpx;
   text-align: center;
   border: 2rpx solid #eee;
@@ -98,43 +89,25 @@ page { background-color: #f5f7fa; }
 }
 .date-week { font-size: 24rpx; color: #999; display: block; }
 .date-day { font-size: 32rpx; font-weight: 600; color: #333; display: block; margin-top: 4rpx; }
-
-/* 表单 */
 .form-item {
   background: #fff;
-  border-radius: 0;
   padding: 20rpx 24rpx;
   margin-bottom: 2rpx;
 }
-.form-label {
-  font-size: 28rpx;
-  color: #333;
-  display: block;
-  margin-bottom: 12rpx;
-}
-.form-input {
-  font-size: 28rpx;
-  width: 100%;
-}
-.form-textarea {
-  width: 100%;
-  height: 140rpx;
-  font-size: 28rpx;
-}
-
-/* 按钮 */
+.form-label { font-size: 28rpx; color: #333; display: block; margin-bottom: 12rpx; }
+.form-input { font-size: 28rpx; width: 100%; }
+.form-textarea { width: 100%; height: 140rpx; font-size: 28rpx; }
 .btn-area {
   display: flex;
   gap: 20rpx;
   margin-top: 40rpx;
-  padding-bottom: 40rpx;
+  padding: 0 24rpx 40rpx;
 }
 .btn-prev {
   flex: 1;
   background: #fff;
   color: #333;
   border: 2rpx solid #ddd;
-  border-radius: 16rpx;
   height: 88rpx;
   line-height: 88rpx;
   font-size: 30rpx;
@@ -143,7 +116,6 @@ page { background-color: #f5f7fa; }
   flex: 2;
   background: #1aad8a;
   color: #fff;
-  border-radius: 16rpx;
   height: 88rpx;
   line-height: 88rpx;
   font-size: 30rpx;

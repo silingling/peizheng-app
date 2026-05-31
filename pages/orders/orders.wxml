@@ -1,5 +1,4 @@
 <view class="container">
-  <!-- Tab 切换 -->
   <view class="tabs">
     <view class="tab {{tab == 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">全部</view>
     <view class="tab {{tab == 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">待服务</view>
@@ -7,7 +6,6 @@
     <view class="tab {{tab == 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3">已完成</view>
   </view>
 
-  <!-- 空状态 -->
   <view class="empty" wx:if="{{orders.length == 0}}">
     <text class="empty-icon">📋</text>
     <text class="empty-text">暂无订单</text>
@@ -15,9 +13,8 @@
     <button class="btn-go" bindtap="goHome">去预约</button>
   </view>
 
-  <!-- 订单列表 -->
   <view class="order-list" wx:else>
-    <view class="order-card" wx:for="{{orders}}" wx:key="id" bindtap="viewDetail" data-id="{{item.id}}">
+    <view class="order-card" wx:for="{{orders}}" wx:key="id">
       <view class="order-header">
         <text class="order-hospital">{{item.hospital}}</text>
         <text class="order-status {{item.statusClass}}">{{item.statusText}}</text>
