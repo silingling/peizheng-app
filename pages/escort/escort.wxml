@@ -1,0 +1,60 @@
+<view class="container">
+  <!-- 顶部数据卡片 -->
+  <view class="stats-card">
+    <view class="stat-item">
+      <text class="stat-num">3</text>
+      <text class="stat-label">今日接单</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-num">¥480</text>
+      <text class="stat-label">今日收入</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-num">28</text>
+      <text class="stat-label">本月服务</text>
+    </view>
+  </view>
+
+  <!-- 待处理提醒 -->
+  <view class="remind-card" bindtap="goOrderList">
+    <text class="remind-icon">📢</text>
+    <text class="remind-text">您有 2 个待处理订单</text>
+    <text class="remind-arrow">›</text>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="quick-actions">
+    <view class="action-item" bindtap="goGrab">
+      <text class="action-icon">📋</text>
+      <text class="action-name">接单大厅</text>
+    </view>
+    <view class="action-item" bindtap="goOrderList">
+      <text class="action-icon">📝</text>
+      <text class="action-name">我的订单</text>
+    </view>
+    <view class="action-item" bindtap="goProfile">
+      <text class="action-icon">👤</text>
+      <text class="action-name">个人中心</text>
+    </view>
+  </view>
+
+  <!-- 可抢订单列表 -->
+  <text class="section-title">附近可接订单</text>
+  
+  <view class="grab-card" wx:for="{{grabOrders}}" wx:key="id">
+    <view class="grab-header">
+      <text class="grab-hospital">{{item.hospital}}</text>
+      <text class="grab-dept">{{item.dept}}</text>
+    </view>
+    <view class="grab-body">
+      <text class="grab-time">{{item.date}} {{item.time}}</text>
+      <text class="grab-patient">{{item.patient}}</text>
+    </view>
+    <view class="grab-footer">
+      <text class="grab-price">¥{{item.price}}</text>
+      <button class="btn-grab" data-id="{{item.id}}" bindtap="grabOrder">
+        抢单
+      </button>
+    </view>
+  </view>
+</view>

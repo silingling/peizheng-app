@@ -1,0 +1,74 @@
+<view class="container">
+  <!-- Banner区域 -->
+  <view class="banner">
+    <text class="banner-title">专业陪诊，暖心相伴</text>
+    <text class="banner-desc">从挂号到取药，全程陪护，让就医不再孤单</text>
+    <view class="banner-stats">
+      <view class="banner-stat">
+        <text class="bs-num">500+</text>
+        <text class="bs-label">服务患者</text>
+      </view>
+      <view class="banner-stat">
+        <text class="bs-num">50+</text>
+        <text class="bs-label">合作医院</text>
+      </view>
+      <view class="banner-stat">
+        <text class="bs-num">98%</text>
+        <text class="bs-label">好评率</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 角色入口 -->
+  <view class="section">
+    <text class="section-title">选择您的身份</text>
+    <view class="role-card" bindtap="goPatient">
+      <view class="role-icon">🏥</view>
+      <view class="role-info">
+        <text class="role-name">就医陪诊</text>
+        <text class="role-desc">我需要陪诊服务</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+
+    <view class="role-card" bindtap="goEscort">
+      <view class="role-icon">👨‍⚕️</view>
+      <view class="role-info">
+        <text class="role-name">陪诊员端</text>
+        <text class="role-desc">我是专业陪诊师</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+
+    <view class="role-card" bindtap="goAdmin">
+      <view class="role-icon">📊</view>
+      <view class="role-info">
+        <text class="role-name">管理端</text>
+        <text class="role-desc">平台运营管理</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+</view>
+
+  <!-- 服务优势 -->
+  <view class="section">
+    <text class="section-title">为什么选择我们</text>
+    <view class="advantages">
+      <view class="adv-item">
+        <text class="adv-icon">⏱️</text>
+        <text class="adv-title">节省时间</text>
+        <text class="adv-desc">陪诊员熟悉流程，减少等候</text>
+      </view>
+      <view class="adv-item">
+        <text class="adv-icon">🤝</text>
+        <text class="adv-title">专业可靠</text>
+        <text class="adv-desc">实名认证，经验丰富</text>
+      </view>
+      <view class="adv-item">
+        <text class="adv-icon">💛</text>
+        <text class="adv-title">贴心周到</text>
+        <text class="adv-desc">全程陪同、情绪安抚</text>
+      </view>
+    </view>
+  </view>

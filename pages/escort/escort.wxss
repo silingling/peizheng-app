@@ -1,0 +1,105 @@
+page { background-color: #f5f7fa; }
+.container { padding: 20rpx 0; }
+
+/* 数据卡片 */
+.stats-card {
+  background: linear-gradient(135deg, #1aad8a, #20c997);
+  border-radius: 20rpx;
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20rpx;
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #fff;
+  display: block;
+}
+.stat-label {
+  font-size: 24rpx;
+  color: rgba(255,255,255,0.85);
+  margin-top: 8rpx;
+  display: block;
+}
+
+/* 提醒 */
+.remind-card {
+  background: #fff7e6;
+  border-radius: 0;
+  padding: 24rpx;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rpx;
+}
+.remind-icon { font-size: 36rpx; margin-right: 16rpx; }
+.remind-text { flex: 1; font-size: 28rpx; color: #d46b08; }
+.remind-arrow { font-size: 36rpx; color: #d46b08; }
+
+/* 快捷入口 */
+.quick-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+.action-item {
+  flex: 1;
+  background: #fff;
+  border-radius: 0;
+  padding: 24rpx;
+  text-align: center;
+}
+.action-icon { font-size: 48rpx; display: block; }
+.action-name { font-size: 26rpx; color: #333; margin-top: 12rpx; display: block; }
+
+/* 标题 */
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+/* 可抢订单卡片 */
+.grab-card {
+  background: #fff;
+  padding: 24rpx;
+  margin-bottom: 2rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+.grab-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+.grab-hospital { font-size: 30rpx; font-weight: 600; color: #333; }
+.grab-dept {
+  font-size: 24rpx;
+  color: #1aad8a;
+  background: #e8faf0;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+}
+.grab-body { margin-bottom: 16rpx; }
+.grab-time { font-size: 26rpx; color: #666; display: block; }
+.grab-patient { font-size: 26rpx; color: #999; margin-top: 4rpx; display: block; }
+.grab-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16rpx;
+  border-top: 2rpx solid #f0f0f0;
+}
+.grab-price { font-size: 36rpx; font-weight: bold; color: #ff4d4f; }
+.btn-grab {
+  background: #1aad8a;
+  color: #fff;
+  font-size: 26rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 40rpx;
+  border-radius: 30rpx;
+}
+button::after { border: none; }
