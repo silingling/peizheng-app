@@ -2,15 +2,17 @@ const app = getApp()
 
 Page({
   data: {
-    step: 1,
+    step: 0,
+    steps: [{ text: '选服务' }, { text: '选时间' }, { text: '确认下单' }],
     serviceTypes: ['全程陪诊', '代取报告', '代取药品', '代办住院'],
+    serviceLabels: ['全程陪同就诊', '代取检查报告', '代取处方药品', '代办入院手续'],
     serviceType: 0,
     hospitals: [
-      { id: 1, name: '北京协和医院', shortAddr: '东城区', count: 128 },
-      { id: 2, name: '中国人民解放军总医院', shortAddr: '海淀区', count: 96 },
-      { id: 3, name: '北京大学第三医院', shortAddr: '海淀区', count: 85 },
-      { id: 4, name: '首都医科大学宣武医院', shortAddr: '西城区', count: 72 },
-      { id: 5, name: '北京天坛医院', shortAddr: '丰台区', count: 68 }
+      { id: 1, name: '北京协和医院', shortAddr: '东城区协和路' },
+      { id: 2, name: '解放军总医院', shortAddr: '海淀区复兴路' },
+      { id: 3, name: '北大第三医院', shortAddr: '海淀区花园路' },
+      { id: 4, name: '宣武医院', shortAddr: '西城区长椿街' },
+      { id: 5, name: '北京天坛医院', shortAddr: '丰台区南四环' }
     ],
     departments: ['内科', '外科', '儿科', '妇产科', '骨科', '神经科', '肿瘤科', '心内科', '眼科', '耳鼻喉科'],
     dates: [
@@ -21,11 +23,9 @@ Page({
       { week: '周五', day: '6/5' }
     ],
     times: ['上午 8:00-12:00', '下午 14:00-17:00', '全天 8:00-17:00'],
-    
     selectedHospital: null,
     selectedDept: -1,
-    selectedService: null,
-    selectedPatient: 'self',
+    patientType: 'self',
     selectedDate: -1,
     selectedTime: -1,
     patientDesc: '',
@@ -35,72 +35,62 @@ Page({
     userPhone: app.globalData.currentUser.phone,
     familyPatients: app.globalData.patients.filter(p => p.relation !== '本人'),
 
-    currentService: '',
-    currentHospital: '',
-    currentDept: '',
-    currentDate: '',
-    currentTime: '',
-    currentPatientName: ''
+    hospitalName: '',
+    deptName: '',
+    dateStr: '',
+    timeStr: '',
+    patientName: app.globalData.currentUser.name
   },
 
-  selectService(e) { this.setData({ serviceType: e.currentTarget.dataset.index }) },
+  selectService(e) {
+    const i = e.currentTarget.dataset.index
+    this.setData({ serviceType: i })
+  },
   selectHospital(e) {
     const id = e.currentTarget.dataset.id
     const h = this.data.hospitals.find(x => x.id == id)
-    this.setData({ selectedHospital: id, currentHospital: h.name })
+    this.setData({ selectedHospital: id, hospitalName: h.name })
   },
   selectDept(e) {
-    const idx = e.currentTarget.dataset.index
-    this.setData({ selectedDept: idx, currentDept: this.data.departments[idx] })
+    const i = e.currentTarget.dataset.index
+    this.setData({ selectedDept: i, deptName: this.data.departments[i] })
   },
-  selectPatient(e) {
-    this.setData({ 
-      selectedPatient: e.currentTarget.dataset.type,
-      currentPatientName: this.data.userName
-    })
+  selectSelf() {
+    this.setData({ patientType: 'self', patientName: this.data.userName })
   },
   selectFamily(e) {
-    const idx = e.currentTarget.dataset.index
-    this.setData({ 
-      selectedPatient: idx,
-      currentPatientName: this.data.familyPatients[idx].name
-    })
+    const i = e.currentTarget.dataset.index
+    this.setData({ patientType: i, patientName: this.data.familyPatients[i].name })
   },
   selectDate(e) {
-    const idx = e.currentTarget.dataset.index
-    this.setData({ selectedDate: idx, currentDate: this.data.dates[idx].week + ' ' + this.data.dates[idx].day })
+    const i = e.currentTarget.dataset.index
+    this.setData({ selectedDate: i, dateStr: this.data.dates[i].week + ' ' + this.data.dates[i].day })
   },
   selectTime(e) {
-    const idx = e.currentTarget.dataset.index
-    this.setData({ selectedTime: idx, currentTime: this.data.times[idx] })
+    const i = e.currentTarget.dataset.index
+    this.setData({ selectedTime: i, timeStr: this.data.times[i] })
   },
   onInputDesc(e) { this.setData({ patientDesc: e.detail.value }) },
-
-  addPatient() {
-    wx.navigateTo({ url: '/pages/patient-manage/patient-manage' })
-  },
+  addPatient() { wx.navigateTo({ url: '/pages/patient-manage/patient-manage' }) },
 
   nextStep() {
-    if (this.data.step == 1) {
+    if (this.data.step == 0) {
       if (!this.data.selectedHospital) return wx.showToast({ title: '请选择医院', icon: 'none' })
       if (this.data.selectedDept == -1) return wx.showToast({ title: '请选择科室', icon: 'none' })
-      this.setData({ 
-        step: 2,
-        currentService: this.data.serviceTypes[this.data.serviceType]
-      })
-    } else if (this.data.step == 2) {
+      this.setData({ step: 1 })
+    } else if (this.data.step == 1) {
       if (this.data.selectedDate == -1) return wx.showToast({ title: '请选择日期', icon: 'none' })
       if (this.data.selectedTime == -1) return wx.showToast({ title: '请选择时段', icon: 'none' })
-      this.setData({ step: 3 })
+      this.setData({ step: 2 })
     } else {
       wx.showModal({
         title: '预约成功',
         content: '已收到您的陪诊预约申请，请等待陪诊员接单',
-        success() {
-          wx.navigateTo({ url: '/pages/orders/orders' })
-        }
+        success() { wx.switchTab({ url: '/pages/orders/orders' }) }
       })
     }
   },
-  prevStep() { if (this.data.step > 1) this.setData({ step: this.data.step - 1 }) }
+  prevStep() {
+    if (this.data.step > 0) this.setData({ step: this.data.step - 1 })
+  }
 })

@@ -1,77 +1,36 @@
-<view class="container">
+<view class="page">
   <view class="apply-header">
     <text class="apply-title">加入我们，成为陪诊员</text>
     <text class="apply-desc">实名认证 · 免费培训 · 灵活接单 · 按单结算</text>
   </view>
 
-  <view class="step-guide">
-    <view class="sg-item">
-      <view class="sg-num">1</view>
-      <view class="sg-info"><text class="sg-title">实名认证</text><text class="sg-desc">上传身份证，人脸核验</text></view>
+  <van-steps steps="{{guideSteps}}" active="-1" active-color="#07c160" />
+
+  <van-cell-group title="基本信息">
+    <van-field value="{{name}}" placeholder="请填写身份证姓名" label="真实姓名" />
+    <van-field value="{{phone}}" placeholder="请填写手机号" label="手机号" type="number" />
+    <van-field value="{{idCard}}" placeholder="请填写身份证号" label="身份证号" />
+    <van-field value="{{area}}" placeholder="如：北京市朝阳区" label="服务区域" />
+  </van-cell-group>
+
+  <van-cell-group title="从业背景">
+    <view class="bg-wrap">
+      <textarea class="bg-input" placeholder="请输入您的从业背景，如：护士、护工、退休医护人员等" />
     </view>
-    <view class="sg-item">
-      <view class="sg-num">2</view>
-      <view class="sg-info"><text class="sg-title">资质上传</text><text class="sg-desc">健康证/护士证等</text></view>
-    </view>
-    <view class="sg-item">
-      <view class="sg-num">3</view>
-      <view class="sg-info"><text class="sg-title">在线培训</text><text class="sg-desc">就医流程/沟通技巧/应急处理</text></view>
-    </view>
-    <view class="sg-item">
-      <view class="sg-num">4</view>
-      <view class="sg-info"><text class="sg-title">考核上线</text><text class="sg-desc">通过考核后正式接单</text></view>
-    </view>
+  </van-cell-group>
+
+  <van-cell-group title="上传资料">
+    <van-cell title="身份证正面" is-link bind:click="uploadID" icon="photograph" />
+    <van-cell title="身份证反面" is-link bind:click="uploadBack" icon="photograph" />
+    <van-cell title="资质证书" is-link bind:click="uploadCert" icon="description" />
+    <van-cell title="本人照片" is-link bind:click="uploadPhoto" icon="photograph" />
+  </van-cell-group>
+
+  <view class="agree-wrap">
+    <van-checkbox value="{{agree}}" bind:change="toggleAgree">我已阅读并同意《陪诊员入驻协议》</van-checkbox>
   </view>
 
-  <view class="form-section">
-    <view class="form-item">
-      <text class="form-label">真实姓名</text>
-      <input class="form-input" placeholder="请填写身份证姓名" />
-    </view>
-    <view class="form-item">
-      <text class="form-label">手机号</text>
-      <input class="form-input" placeholder="请填写手机号" type="number" />
-    </view>
-    <view class="form-item">
-      <text class="form-label">身份证号</text>
-      <input class="form-input" placeholder="请填写身份证号" />
-    </view>
-    <view class="form-item">
-      <text class="form-label">服务区域</text>
-      <input class="form-input" placeholder="如：北京市朝阳区" />
-    </view>
-    <view class="form-item">
-      <text class="form-label">从业背景</text>
-      <textarea class="form-textarea" placeholder="请输入您的从业背景，如：护士、护工、退休医护人员等"></textarea>
-    </view>
+  <view class="submit-wrap">
+    <van-button type="primary" size="large" disabled="{{!agree}}" bind:click="submitApply">提交入驻申请</van-button>
   </view>
-
-  <view class="upload-section">
-    <text class="section-title">上传资料</text>
-    <view class="upload-grid">
-      <view class="upload-item" bindtap="uploadID">
-        <text class="upload-icon">📷</text>
-        <text class="upload-label">身份证正面</text>
-      </view>
-      <view class="upload-item" bindtap="uploadBack">
-        <text class="upload-icon">📷</text>
-        <text class="upload-label">身份证反面</text>
-      </view>
-      <view class="upload-item" bindtap="uploadCert">
-        <text class="upload-icon">📄</text>
-        <text class="upload-label">资质证书</text>
-      </view>
-      <view class="upload-item" bindtap="uploadPhoto">
-        <text class="upload-icon">📷</text>
-        <text class="upload-label">本人照片</text>
-      </view>
-    </view>
-  </view>
-
-  <view class="agree-section">
-    <checkbox checked="{{agree}}" bindchange="toggleAgree" /> 
-    <text>我已阅读并同意《陪诊员入驻协议》</text>
-  </view>
-
-  <button class="btn-submit" disabled="{{!agree}}" bindtap="submitApply">提交入驻申请</button>
 </view>

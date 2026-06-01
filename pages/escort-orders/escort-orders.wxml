@@ -1,33 +1,21 @@
-<view class="container">
-  <view class="tabs">
-    <view class="tab {{tab == 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">待服务</view>
-    <view class="tab {{tab == 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">服务中</view>
-    <view class="tab {{tab == 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">已完成</view>
-  </view>
+<view class="page">
+  <van-tabs active="{{tab}}" bind:change="switchTab">
+    <van-tab title="待服务"></van-tab>
+    <van-tab title="服务中"></van-tab>
+    <van-tab title="已完成"></van-tab>
+  </van-tabs>
 
-  <view wx:if="{{orders.length == 0}}">
-    <view class="empty">
-      <text class="empty-icon">📋</text>
-      <text class="empty-text">暂无订单</text>
-      <text class="empty-desc">去接单大厅查看可接订单</text>
+  <van-empty wx:if="{{orders.length == 0}}" description="暂无订单" />
+
+  <van-cell wx:for="{{orders}}" wx:key="id" wx:else center>
+    <view slot="title">
+      <text>{{item.hospital}} · {{item.dept}}</text>
+      <van-tag size="mini" type="{{item.statusClass == 'ongoing' ? 'primary' : item.statusClass == 'done' ? 'success' : 'warning'}}" style="margin-left:8rpx;">{{item.statusText}}</van-tag>
     </view>
-  </view>
-  <view wx:else>
-  <view class="order-card" wx:for="{{orders}}" wx:key="id">
-    <view class="order-header">
-      <text class="oc-hospital">{{item.hospital}}</text>
-      <text class="oc-status {{item.statusClass}}">{{item.statusText}}</text>
+    <view slot="label">{{item.date}} {{item.time}} · 患者：{{item.patient}} {{item.patientAge}}</view>
+    <view slot="right-icon">
+      <van-button wx:if="{{tab == 0}}" type="primary" size="mini" bind:click="startService">开始服务</van-button>
+      <van-button wx:if="{{tab == 1}}" type="success" size="mini" bind:click="completeService">完成</van-button>
     </view>
-    <view class="order-body">
-      <text class="oc-detail">{{item.dept}} · {{item.date}} {{item.time}}</text>
-      <text class="oc-patient">患者：{{item.patient}} · {{item.patientAge}}</text>
-      <text class="oc-desc" wx:if="{{item.desc}}">备注：{{item.desc}}</text>
-    </view>
-    <view class="order-actions">
-      <view class="oa-btn call" bindtap="callPatient">📞 联系</view>
-      <view class="oa-btn primary" bindtap="startService" wx:if="{{tab == 0}}">开始服务</view>
-      <view class="oa-btn primary" bindtap="completeService" wx:if="{{tab == 1}}">完成服务</view>
-    </view>
-  </view>
-</view>
+  </van-cell>
 </view>

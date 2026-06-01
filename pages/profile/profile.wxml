@@ -1,66 +1,35 @@
-<view class="container">
-  <!-- 用户信息头部 -->
+<view class="page">
+  <!-- 用户头部 -->
   <view class="user-header">
-    <view class="uh-avatar">{{userName[0]}}</view>
-    <view class="uh-info">
-      <text class="uh-name">{{userName}}</text>
-      <text class="uh-phone">{{userPhone}}</text>
+    <view class="user-avatar">{{userName[0]}}</view>
+    <view class="user-info">
+      <text class="user-name">{{userName}}</text>
+      <text class="user-phone">{{userPhone}}</text>
     </view>
-    <text class="uh-badge">患者端</text>
+    <van-tag type="primary" size="medium">患者端</van-tag>
   </view>
 
   <!-- 快捷入口 -->
-  <view class="quick-menu">
-    <view class="qm-item" bindtap="goPatientManages">
-      <text class="qm-icon">👥</text>
-      <text class="qm-label">就诊人管理</text>
-      <text class="qm-arrow">›</text>
-    </view>
-    <view class="qm-item" bindtap="goRecords">
-      <text class="qm-icon">📁</text>
-      <text class="qm-label">就诊档案</text>
-      <text class="qm-count">{{recordsCount}}条</text>
-      <text class="qm-arrow">›</text>
-    </view>
-    <view class="qm-item" bindtap="goOrders">
-      <text class="qm-icon">📋</text>
-      <text class="qm-label">我的订单</text>
-      <text class="qm-arrow">›</text>
-    </view>
-    <view class="qm-item" bindtap="goFavorites">
-      <text class="qm-icon">⭐</text>
-      <text class="qm-label">收藏陪诊员</text>
-      <text class="qm-arrow">›</text>
-    </view>
-  </view>
+  <van-cell-group style="margin-top:12rpx;">
+    <van-cell title="就诊人管理" icon="contact" is-link bind:click="goPatientManages" />
+    <van-cell title="就诊档案" icon="records" is-link :value="recordsCount + '条'" bind:click="goRecords" />
+    <van-cell title="我的订单" icon="orders-o" is-link bind:click="goOrders" />
+    <van-cell title="收藏陪诊员" icon="star-o" is-link bind:click="goFavorites" />
+  </van-cell-group>
 
-  <!-- 服务记录 -->
-  <view class="section-title">最近服务</view>
-  <view class="order-card" wx:for="{{recentOrders}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
-    <view class="oc-header">
-      <text class="oc-hospital">{{item.hospital}}</text>
-      <text class="oc-status {{item.statusClass}}">{{item.statusText}}</text>
-    </view>
-    <text class="oc-info">{{item.date}} · {{item.dept}}</text>
-    <text class="oc-escort">陪诊员：{{item.escort}}</text>
-  </view>
+  <!-- 最近服务 -->
+  <van-cell-group title="最近服务">
+    <van-cell wx:for="{{recentOrders}}" wx:key="id" title="{{item.hospital}}" :label="item.date + ' · ' + item.dept" data-id="{{item.id}}" is-link bind:click="goDetail">
+      <view slot="right-icon">
+        <van-tag type="{{item.statusClass == 'done' ? 'success' : item.statusClass == 'ongoing' ? 'primary' : 'warning'}}" size="mini">{{item.statusText}}</van-tag>
+      </view>
+    </van-cell>
+  </van-cell-group>
 
-  <!-- 其他设置 -->
-  <view class="quick-menu" style="margin-top: 20rpx;">
-    <view class="qm-item" bindtap="contactCS">
-      <text class="qm-icon">🎧</text>
-      <text class="qm-label">联系客服</text>
-      <text class="qm-arrow">›</text>
-    </view>
-    <view class="qm-item" bindtap="shareApp">
-      <text class="qm-icon">📤</text>
-      <text class="qm-label">推荐给朋友</text>
-      <text class="qm-arrow">›</text>
-    </view>
-    <view class="qm-item" bindtap="switchRole">
-      <text class="qm-icon">🔄</text>
-      <text class="qm-label">切换到陪诊员端</text>
-      <text class="qm-arrow">›</text>
-    </view>
-  </view>
+  <!-- 设置 -->
+  <van-cell-group style="margin-top:12rpx;">
+    <van-cell title="联系客服" icon="service-o" is-link bind:click="contactCS" />
+    <van-cell title="推荐给朋友" icon="share-o" is-link bind:click="shareApp" />
+    <van-cell title="切换到陪诊员端" icon="exchange" is-link bind:click="switchRole" />
+  </van-cell-group>
 </view>

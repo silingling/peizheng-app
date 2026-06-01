@@ -1,40 +1,34 @@
-<view class="container">
-  <!-- 收入统计 -->
+<view class="page">
+  <!-- 收入概览 -->
   <view class="income-header">
-    <view class="ih-item">
-      <text class="ih-label">本月收入</text>
-      <text class="ih-amount">¥6,380</text>
+    <view class="inc-item">
+      <text class="inc-label">本月收入</text>
+      <text class="inc-num">¥6,380</text>
     </view>
-    <view class="ih-divider"></view>
-    <view class="ih-item">
-      <text class="ih-label">已提现</text>
-      <text class="ih-amount">¥4,500</text>
+    <view class="inc-divider"></view>
+    <view class="inc-item">
+      <text class="inc-label">已提现</text>
+      <text class="inc-num">¥4,500</text>
     </view>
-    <view class="ih-divider"></view>
-    <view class="ih-item">
-      <text class="ih-label">可提现</text>
-      <text class="ih-amount red">¥1,880</text>
+    <view class="inc-divider"></view>
+    <view class="inc-item">
+      <text class="inc-label">可提现</text>
+      <text class="inc-num red">¥1,880</text>
     </view>
   </view>
 
-  <!-- 提现操作 -->
-  <view class="withdraw-card">
-    <text class="wc-title">可提现余额</text>
-    <text class="wc-amount">¥1,880.00</text>
-    <text class="wc-tip">满100元即可提现，T+1到账微信零钱</text>
-    <button class="btn-withdraw" bindtap="doWithdraw">立即提现</button>
-  </view>
+  <!-- 提现 -->
+  <van-cell is-link title="立即提现" label="满100元即可提现，T+1到账微信零钱" value="¥1,880.00" bind:click="doWithdraw" />
 
   <!-- 收入明细 -->
-  <view class="section-title">收入明细</view>
-  <view class="income-item" wx:for="{{incomes}}" wx:key="id">
-    <view class="ii-left">
-      <text class="ii-title">{{item.title}}</text>
-      <text class="ii-time">{{item.time}}</text>
-    </view>
-    <view class="ii-right">
-      <text class="ii-price">+¥{{item.amount}}</text>
-      <text class="ii-status {{item.statusClass}}">{{item.status}}</text>
-    </view>
-  </view>
+  <van-cell-group title="收入明细">
+    <van-cell wx:for="{{incomes}}" wx:key="id">
+      <view slot="title">
+        <text>{{item.title}}</text>
+        <van-tag size="mini" type="{{item.statusClass == 'settled' ? 'success' : 'warning'}}" style="margin-left:8rpx;">{{item.status}}</van-tag>
+      </view>
+      <view slot="label">{{item.time}}</view>
+      <view slot="value" style="color:#ee0a24;font-weight:bold;">+¥{{item.amount}}</view>
+    </van-cell>
+  </van-cell-group>
 </view>

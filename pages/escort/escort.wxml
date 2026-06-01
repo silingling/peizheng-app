@@ -1,57 +1,44 @@
-<view class="container">
-  <!-- 顶部数据卡片 -->
-  <view class="stats-card">
-    <view class="stat-item"><text class="stat-num">3</text><text class="stat-label">今日接单</text></view>
-    <view class="stat-item"><text class="stat-num">¥480</text><text class="stat-label">今日收入</text></view>
-    <view class="stat-item"><text class="stat-num">28</text><text class="stat-label">本月服务</text></view>
-    <view class="stat-item"><text class="stat-num">4.9</text><text class="stat-label">综合评分</text></view>
+<view class="page">
+  <!-- 数据统计 -->
+  <view class="stats-header">
+    <view class="stat-item" wx:for="{{stats}}" wx:key="index">
+      <text class="stat-num">{{item.num}}</text>
+      <text class="stat-label">{{item.label}}</text>
+    </view>
   </view>
 
-  <!-- 提醒卡片 -->
-  <view class="remind-card" bindtap="goMyOrders">
-    <text class="remind-icon">📢</text>
-    <text class="remind-text">您有 2 个待处理订单</text>
-    <text class="remind-arrow">›</text>
-  </view>
+  <!-- 提醒 -->
+  <van-notice-bar text="您有 2 个待处理订单" left-icon="volume-o" bind:click="goMyOrders" />
 
   <!-- 快捷操作 -->
-  <view class="quick-actions">
-    <view class="action-item" bindtap="goGrab"><text class="action-icon">📋</text><text class="action-name">接单大厅</text></view>
-    <view class="action-item" bindtap="goMyOrders"><text class="action-icon">📝</text><text class="action-name">我的订单</text></view>
-    <view class="action-item" bindtap="goIncome"><text class="action-icon">💰</text><text class="action-name">收入中心</text></view>
-    <view class="action-item" bindtap="goProfile"><text class="action-icon">👤</text><text class="action-name">个人中心</text></view>
-  </view>
+  <van-grid column-num="{{4}}" border="{{false}}" style="margin-top:12rpx;background:#fff;">
+    <van-grid-item icon="orders-o" text="接单大厅" bind:click="goGrab" />
+    <van-grid-item icon="records" text="我的订单" bind:click="goMyOrders" />
+    <van-grid-item icon="gold-coin-o" text="收入中心" bind:click="goIncome" />
+    <van-grid-item icon="contact" text="个人中心" use-button-slot>
+      <view slot="button"><van-icon name="contact" size="28" color="#07c160" /></view>
+      <text style="font-size:22rpx;color:#666;margin-top:4rpx;display:block;">个人资料</text>
+    </van-grid-item>
+  </van-grid>
 
-  <!-- 今日服务提醒 -->
-  <view class="today-card">
-    <text class="today-title">📅 今日服务</text>
-    <view class="today-order" wx:for="{{todayOrders}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
-      <view class="to-time">{{item.time}}</view>
-      <view class="to-info">
-        <text class="to-hospital">{{item.hospital}}</text>
-        <text class="to-patient">{{item.patient}}</text>
+  <!-- 今日服务 -->
+  <van-cell-group title="📅 今日服务">
+    <van-cell wx:for="{{todayOrders}}" wx:key="id">
+      <view slot="title">
+        <text>{{item.hospital}}</text>
+        <van-tag type="{{item.statusClass == 'ongoing' ? 'primary' : 'warning'}}" size="mini" style="margin-left:8rpx;">{{item.statusText}}</van-tag>
       </view>
-      <text class="to-status {{item.statusClass}}">{{item.statusText}}</text>
-    </view>
-  </view>
+      <view slot="label">{{item.time}} · {{item.patient}}</view>
+    </van-cell>
+  </van-cell-group>
 
-  <!-- 接单大厅 -->
-  <text class="section-title">附近可接订单</text>
-  <view class="grab-card" wx:for="{{grabOrders}}" wx:key="id">
-    <view class="grab-header">
-      <text class="grab-hospital">{{item.hospital}}</text>
-      <text class="grab-dept">{{item.dept}}</text>
-    </view>
-    <view class="grab-body">
-      <text class="grab-time">{{item.date}} {{item.time}}</text>
-      <text class="grab-patient">{{item.patient}}</text>
-    </view>
-    <view class="grab-footer">
-      <view class="gf-left">
-        <text class="grab-price">¥{{item.price}}</text>
-        <text class="grab-distance">{{item.distance}}</text>
+  <!-- 可接订单 -->
+  <van-cell-group title="附近可接订单">
+    <van-swipe-cell wx:for="{{grabOrders}}" wx:key="id" right-width="{{140}}">
+      <van-cell title="{{item.hospital}}" :label="item.date + ' ' + item.time" :value="'¥' + item.price" />
+      <view slot="right">
+        <van-button type="primary" size="small" data-id="{{item.id}}" bind:click="grabOrder">接单</van-button>
       </view>
-      <button class="btn-grab" data-id="{{item.id}}" bindtap="grabOrder">立即接单</button>
-    </view>
-  </view>
+    </van-swipe-cell>
+  </van-cell-group>
 </view>

@@ -1,108 +1,76 @@
-<view class="container">
-  <!-- 顶部搜索 -->
-  <view class="search-bar" bindtap="goPatient">
-    <text class="search-icon">🔍</text>
-    <text class="search-text">搜索医院、科室...</text>
-  </view>
+<view class="page">
+  <!-- 搜索栏 -->
+  <van-search value="{{searchVal}}" placeholder="搜索医院、科室..." />
 
-  <!-- Banner轮播 -->
-  <view class="banner-swiper">
-    <swiper autoplay circular interval="3000" indicator-dots indicator-color="rgba(255,255,255,0.4)" indicator-active-color="#fff">
-      <swiper-item wx:for="{{banners}}" wx:key="index">
-        <view class="banner-slide" style="background: {{item.bg}};">
-          <view class="banner-content">
-            <text class="banner-title">{{item.title}}</text>
-            <text class="banner-desc">{{item.desc}}</text>
-            <text class="banner-tag">{{item.tag}}</text>
-          </view>
-        </view>
-      </swiper-item>
-    </swiper>
-  </view>
+  <!-- Banner 轮播 -->
+  <van-swipe class="banner-swipe" autoplay="{{3000}}" circular indicator-color="white">
+    <van-swipe-item wx:for="{{banners}}" wx:key="index">
+      <view class="banner-item" style="background: {{item.bg}};">
+        <text class="banner-title">{{item.title}}</text>
+        <text class="banner-desc">{{item.desc}}</text>
+        <van-tag type="white" plain class="banner-tag">{{item.tag}}</van-tag>
+      </view>
+    </van-swipe-item>
+  </van-swipe>
 
-  <!-- 平台数据 -->
+  <!-- 数据统计 -->
   <view class="stats-row">
-    <view class="stat-item">
-      <text class="stat-num">500+</text>
-      <text class="stat-label">服务患者</text>
-    </view>
-    <view class="stat-item">
-      <text class="stat-num">50+</text>
-      <text class="stat-label">合作医院</text>
-    </view>
-    <view class="stat-item">
-      <text class="stat-num">98%</text>
-      <text class="stat-label">好评率</text>
-    </view>
-    <view class="stat-item">
-      <text class="stat-num">7×24</text>
-      <text class="stat-label">全天服务</text>
+    <view class="stats-item" wx:for="{{stats}}" wx:key="index">
+      <text class="stat-num">{{item.num}}</text>
+      <text class="stat-label">{{item.label}}</text>
     </view>
   </view>
 
   <!-- 快捷服务 -->
-  <view class="section">
-    <text class="section-title">快捷服务</text>
-    <view class="quick-grid">
-      <view class="quick-item" bindtap="goPatient">
-        <text class="qi-icon">🏥</text>
-        <text class="qi-label">就医陪诊</text>
-        <text class="qi-desc">全程陪同就诊</text>
-      </view>
-      <view class="quick-item" bindtap="goSubstitute">
-        <text class="qi-icon">📋</text>
-        <text class="qi-label">代办服务</text>
-        <text class="qi-desc">代取药/代取报告</text>
-      </view>
-      <view class="quick-item" bindtap="goNurse">
-        <text class="qi-icon">👩‍⚕️</text>
-        <text class="qi-label">护士到家</text>
-        <text class="qi-desc">上门护理服务</text>
-      </view>
-      <view class="quick-item" bindtap="goHospice">
-        <text class="qi-icon">🚑</text>
-        <text class="qi-label">转运护送</text>
-        <text class="qi-desc">非急救转运</text>
-      </view>
+  <view class="section-wrap">
+    <view class="section-header">
+      <text class="section-title">快捷服务</text>
     </view>
+    <van-grid column-num="{{4}}" border="{{false}}">
+      <van-grid-item icon="medel-o" text="就医陪诊" bind:click="goPatient" />
+      <van-grid-item icon="description" text="代办服务" bind:click="goSubstitute" />
+      <van-grid-item icon="flower-o" text="护士到家" bind:click="goNurse" />
+      <van-grid-item icon="logistics" text="转运护送" bind:click="goHospice" />
+    </van-grid>
   </view>
 
   <!-- 热门医院 -->
-  <view class="section">
-    <text class="section-title">热门医院</text>
-    <scroll-view class="hospital-scroll" scroll-x>
-      <view class="hospital-card" wx:for="{{hospitals}}" wx:key="id" bindtap="goPatient">
-        <text class="hc-name">{{item.name}}</text>
-        <text class="hc-addr">{{item.shortAddr}}</text>
-        <text class="hc-count">已服务{{item.count}}人</text>
+  <view class="section-wrap">
+    <view class="section-header">
+      <text class="section-title">热门医院</text>
+    </view>
+    <scroll-view class="hosp-scroll" scroll-x>
+      <view class="hosp-card" wx:for="{{hospitals}}" wx:key="id" bindtap="goPatient">
+        <text class="hosp-name">{{item.name}}</text>
+        <text class="hosp-addr">{{item.shortAddr}}</text>
+        <van-tag type="success" size="mini">已服务{{item.count}}人</van-tag>
       </view>
     </scroll-view>
   </view>
 
-  <!-- 为什么选择我们 -->
-  <view class="section">
-    <view class="advantages">
-      <view class="adv-item">
-        <text class="adv-icon">⏱️</text>
-        <text class="adv-title">节省时间</text>
-        <text class="adv-desc">熟悉流程减少等候</text>
-      </view>
-      <view class="adv-item">
-        <text class="adv-icon">🤝</text>
-        <text class="adv-title">专业可靠</text>
-        <text class="adv-desc">实名认证经验丰富</text>
-      </view>
-      <view class="adv-item">
-        <text class="adv-icon">💛</text>
-        <text class="adv-title">贴心周到</text>
-        <text class="adv-desc">全程陪同情绪安抚</text>
-      </view>
+  <!-- 为什么选我们 -->
+  <view class="section-wrap">
+    <view class="section-header">
+      <text class="section-title">为什么选择我们</text>
     </view>
+    <van-grid column-num="{{3}}" border="{{false}}">
+      <van-grid-item icon="clock-o" text="节省时间" use-button-slot>
+        <view slot="button"><text class="grid-sub">熟悉流程减少等候</text></view>
+      </van-grid-item>
+      <van-grid-item icon="friends-o" text="专业可靠" use-button-slot>
+        <view slot="button"><text class="grid-sub">实名认证经验丰富</text></view>
+      </van-grid-item>
+      <van-grid-item icon="like-o" text="贴心周到" use-button-slot>
+        <view slot="button"><text class="grid-sub">全程陪同情绪安抚</text></view>
+      </van-grid-item>
+    </van-grid>
   </view>
-</view>
 
-<!-- 底部导航 - 管理员/陪诊员入口 -->
-<view class="bottom-entries">
-  <view class="entry-btn" bindtap="goEscort">👨‍⚕️ 陪诊员端</view>
-  <view class="entry-btn admin" bindtap="goAdmin">📊 管理端</view>
+  <view style="height: 120rpx;"></view>
+
+  <!-- 底部入口 -->
+  <van-goods-action>
+    <van-goods-action-icon icon="friends-o" text="陪诊员端" bind:click="goEscort" />
+    <van-goods-action-icon icon="manager-o" text="管理端" bind:click="goAdmin" />
+  </van-goods-action>
 </view>

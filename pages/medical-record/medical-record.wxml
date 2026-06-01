@@ -1,26 +1,20 @@
-<view class="container">
-  <view class="section-title">就诊档案</view>
+<view class="page">
+  <van-empty wx:if="{{records.length == 0}}" description="暂无就诊记录" />
 
-  <view class="empty" wx:if="{{records.length == 0}}">
-    <text class="empty-icon">📁</text>
-    <text class="empty-text">暂无就诊记录</text>
-    <text class="empty-desc">预约陪诊后每次就诊记录自动保存</text>
-  </view>
-
-  <view class="record-card" wx:for="{{records}}" wx:key="id">
-    <view class="rc-header">
-      <text class="rc-hospital">{{item.hospital}}</text>
-      <text class="rc-date">{{item.date}}</text>
-    </view>
-    <text class="rc-dept">{{item.dept}} · {{item.doctor}}</text>
-    <text class="rc-diagnosis">诊断：{{item.diagnosis}}</text>
-    <text class="rc-advice">医嘱：{{item.advice}}</text>
-    <view class="rc-files" wx:if="{{item.files.length > 0}}">
-      <view class="rc-file" wx:for="{{item.files}}" wx:for-item="f" wx:key="index">📎 {{f}}</view>
-    </view>
-    <view class="rc-footer">
-      <text class="rc-escort">陪诊员：{{item.escort}}</text>
-      <text class="rc-again" bindtap="rebook" data-hospital="{{item.hospital}}" data-dept="{{item.dept}}">再来一次</text>
-    </view>
+  <view wx:else>
+    <van-cell wx:for="{{records}}" wx:key="id" center>
+      <view slot="title">
+        <text>{{item.hospital}}</text>
+        <van-tag type="success" size="mini" style="margin-left:8rpx;">{{item.dept}}</van-tag>
+      </view>
+      <view slot="label">
+        <text>{{item.date}} · {{item.doctor}}</text>
+        <text style="display:block;margin-top:6rpx;">诊断：{{item.diagnosis}}</text>
+        <text style="display:block;color:#999;font-size:22rpx;margin-top:4rpx;">医嘱：{{item.advice}}</text>
+      </view>
+      <view slot="right-icon">
+        <van-button size="mini" type="primary" plain data-hospital="{{item.hospital}}" data-dept="{{item.dept}}" bind:click="rebook">再来</van-button>
+      </view>
+    </van-cell>
   </view>
 </view>

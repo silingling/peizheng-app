@@ -1,104 +1,75 @@
-<view class="container">
-  <!-- 步骤条 -->
-  <view class="steps">
-    <view class="step {{step >= 1 ? 'active' : ''}}">
-      <view class="step-num">1</view><text>选服务</text>
-    </view>
-    <view class="step-line {{step >= 2 ? 'active' : ''}}"></view>
-    <view class="step {{step >= 2 ? 'active' : ''}}">
-      <view class="step-num">2</view><text>选时间</text>
-    </view>
-    <view class="step-line {{step >= 3 ? 'active' : ''}}"></view>
-    <view class="step {{step >= 3 ? 'active' : ''}}">
-      <view class="step-num">3</view><text>确认下单</text>
-    </view>
+<view class="page">
+  <van-steps steps="{{steps}}" active="{{step}}" active-color="#07c160" />
+
+  <!-- Step 1 -->
+  <view wx:if="{{step == 0}}">
+    <van-cell-group title="服务类型">
+      <van-cell wx:for="{{serviceTypes}}" wx:key="index" title="{{item}}" label="{{serviceLabels[index]}}" data-index="{{index}}" bind:click="selectService">
+        <van-icon slot="right-icon" name="success" color="#07c160" wx:if="{{serviceType == index}}" />
+      </van-cell>
+    </van-cell-group>
+
+    <van-cell-group title="选择医院">
+      <van-cell wx:for="{{hospitals}}" wx:key="id" title="{{item.name}}" label="{{item.shortAddr}}" data-id="{{item.id}}" bind:click="selectHospital">
+        <van-icon slot="right-icon" name="success" color="#07c160" wx:if="{{selectedHospital == item.id}}" />
+      </van-cell>
+    </van-cell-group>
+
+    <van-cell-group title="选择科室">
+      <van-cell wx:for="{{departments}}" wx:key="index" title="{{item}}" data-index="{{index}}" bind:click="selectDept">
+        <van-icon slot="right-icon" name="success" color="#07c160" wx:if="{{selectedDept == index}}" />
+      </van-cell>
+    </van-cell-group>
   </view>
 
-  <!-- 第一步：选择医院+科室+服务类型 -->
-  <view class="form-section" wx:if="{{step == 1}}">
-    <text class="section-title">服务类型</text>
-    <view class="tag-group">
-      <view class="tag {{serviceType == index ? 'active' : ''}}" 
-            wx:for="{{serviceTypes}}" wx:key="index" bindtap="selectService" data-index="{{index}}">{{item}}</view>
-    </view>
+  <!-- Step 2 -->
+  <view wx:if="{{step == 1}}">
+    <van-cell-group title="选择就诊人">
+      <van-cell title="{{userName}}（本人）" label="{{userPhone}}" bind:click="selectSelf">
+        <van-icon slot="right-icon" name="success" color="#07c160" wx:if="{{patientType == 'self'}}" />
+      </van-cell>
+      <van-cell wx:for="{{familyPatients}}" wx:key="id" title="{{item.name}}（{{item.relation}}）" label="{{item.phone}}" data-index="{{idx}}" bind:click="selectFamily">
+        <van-icon slot="right-icon" name="success" color="#07c160" wx:if="{{patientType == idx}}" />
+      </van-cell>
+      <van-cell title="+ 添加就诊人" title-class="add-title" bind:click="addPatient" />
+    </van-cell-group>
 
-    <text class="section-title" style="margin-top: 30rpx;">选择医院</text>
-    <input class="search-input" placeholder="搜索医院名称" />
-    <view class="list-items">
-      <view class="list-item" wx:for="{{hospitals}}" wx:key="id" bindtap="selectHospital" data-id="{{id}}">
-        <text class="li-name">{{item.name}}</text>
-        <text class="li-sub">{{item.shortAddr}} · 已服务{{item.count}}人</text>
-        <view class="li-check {{selectedHospital == id ? 'checked' : ''}}"></view>
-      </view>
-    </view>
+    <van-cell-group title="选择日期">
+      <van-cell wx:for="{{dates}}" wx:key="index" :title="item.week" :label="item.day" data-index="{{index}}" bind:click="selectDate">
+        <van-icon slot="right-icon" name="success" color="#07c160" wx:if="{{selectedDate == index}}" />
+      </van-cell>
+    </van-cell-group>
 
-    <text class="section-title" style="margin-top: 30rpx;">选择科室</text>
-    <view class="tag-group">
-      <view class="tag {{selectedDept == index ? 'active' : ''}}" 
-            wx:for="{{departments}}" wx:key="index" bindtap="selectDept" data-index="{{index}}">{{item}}</view>
-    </view>
+    <van-cell-group title="选择时段">
+      <van-cell wx:for="{{times}}" wx:key="index" title="{{item}}" data-index="{{index}}" bind:click="selectTime">
+        <van-icon slot="right-icon" name="success" color="#07c160" wx:if="{{selectedTime == index}}" />
+      </van-cell>
+    </van-cell-group>
   </view>
 
-  <!-- 第二步：选择就诊人+日期+时间 -->
-  <view class="form-section" wx:if="{{step == 2}}">
-    <text class="section-title">选择就诊人</text>
-    <view class="patient-select">
-      <view class="patient-option {{selectedPatient == 'self' ? 'active' : ''}}" bindtap="selectPatient" data-type="self">
-        <text class="po-name">{{userName}}（本人）</text>
-        <text class="po-phone">{{userPhone}}</text>
-        <view class="po-check {{selectedPatient == 'self' ? 'checked' : ''}}"></view>
-      </view>
-      <view class="patient-option {{selectedPatient == idx ? 'active' : ''}}" 
-            wx:for="{{familyPatients}}" wx:key="id" bindtap="selectFamily" data-index="{{idx}}">
-        <text class="po-name">{{item.name}}（{{item.relation}}）</text>
-        <text class="po-phone">{{item.phone}}</text>
-        <view class="po-check {{selectedPatient == idx ? 'checked' : ''}}"></view>
-      </view>
-      <view class="patient-add" bindtap="addPatient">+ 添加就诊人</view>
-    </view>
+  <!-- Step 3 -->
+  <view wx:if="{{step == 2}}">
+    <van-cell-group title="确认订单信息">
+      <van-cell title="服务类型" value="{{serviceTypes[serviceType]}}" />
+      <van-cell title="就诊医院" value="{{hospitalName}}" />
+      <van-cell title="就诊科室" value="{{deptName}}" />
+      <van-cell title="就诊时间" value="{{dateStr}} {{timeStr}}" />
+      <van-cell title="就诊人" value="{{patientName}}" />
+    </van-cell-group>
 
-    <text class="section-title" style="margin-top: 30rpx;">选择日期</text>
-    <view class="date-list">
-      <view class="date-item {{selectedDate == index ? 'active' : ''}}" 
-            wx:for="{{dates}}" wx:key="index" bindtap="selectDate" data-index="{{index}}">
-        <text class="date-week">{{item.week}}</text>
-        <text class="date-day">{{item.day}}</text>
+    <van-cell-group title="病情描述（选填）">
+      <view class="desc-wrap">
+        <textarea class="desc-input" placeholder="请简要描述症状，方便陪诊员提前准备" bindinput="onInputDesc" />
       </view>
-    </view>
+    </van-cell-group>
 
-    <text class="section-title">选择时段</text>
-    <view class="tag-group">
-      <view class="tag {{selectedTime == index ? 'active' : ''}}" 
-            wx:for="{{times}}" wx:key="index" bindtap="selectTime" data-index="{{index}}">{{item}}</view>
-    </view>
+    <van-cell title="服务费用" value="{{'¥' + servicePrice}}" title-class="price-label" value-class="price-value" />
   </view>
 
-  <!-- 第三步：确认下单 -->
-  <view class="form-section" wx:if="{{step == 3}}">
-    <text class="section-title">确认订单信息</text>
-
-    <view class="confirm-card">
-      <view class="confirm-row"><text class="cr-label">服务类型</text><text class="cr-value">{{currentService}}</text></view>
-      <view class="confirm-row"><text class="cr-label">就诊医院</text><text class="cr-value">{{currentHospital}}</text></view>
-      <view class="confirm-row"><text class="cr-label">就诊科室</text><text class="cr-value">{{currentDept}}</text></view>
-      <view class="confirm-row"><text class="cr-label">就诊时间</text><text class="cr-value">{{currentDate}} {{currentTime}}</text></view>
-      <view class="confirm-row"><text class="cr-label">就诊人</text><text class="cr-value">{{currentPatientName}}</text></view>
-    </view>
-
-    <text class="section-title" style="margin-top: 30rpx;">病情描述（选填）</text>
-    <textarea class="form-textarea" placeholder="请简要描述症状，方便陪诊员提前准备" bindinput="onInputDesc"></textarea>
-
-    <view class="price-card">
-      <text class="price-label">服务费用</text>
-      <text class="price-value">¥{{servicePrice}}</text>
-    </view>
-  </view>
-
-  <!-- 底部按钮 -->
-  <view class="btn-area">
-    <button class="btn-prev" wx:if="{{step > 1}}" bindtap="prevStep">上一步</button>
-    <button class="btn-submit {{step == 3 ? 'final' : ''}}" bindtap="nextStep">
-      {{step < 3 ? '下一步' : '提交预约'}}
-    </button>
+  <view class="btn-wrap">
+    <van-button wx:if="{{step > 0}}" type="default" bind:click="prevStep" class="btn-half" size="large">上一步</van-button>
+    <van-button type="primary" bind:click="nextStep" class="btn-half" size="large">
+      {{step < 2 ? '下一步' : '提交预约'}}
+    </van-button>
   </view>
 </view>

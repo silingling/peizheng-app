@@ -1,84 +1,73 @@
-<view class="container">
-  <view class="admin-tabs">
-    <view class="admin-tab {{adminTab == 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">📊 仪表盘</view>
-    <view class="admin-tab {{adminTab == 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">👥 陪诊员</view>
-    <view class="admin-tab {{adminTab == 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">📝 订单</view>
-    <view class="admin-tab {{adminTab == 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3">👤 用户</view>
-  </view>
+<view class="page">
+  <van-tabs active="{{adminTab}}" bind:change="switchTab">
+    <van-tab title="仪表盘"></van-tab>
+    <van-tab title="陪诊员"></van-tab>
+    <van-tab title="订单"></van-tab>
+    <van-tab title="用户"></van-tab>
+  </van-tabs>
 
   <!-- 仪表盘 -->
   <view wx:if="{{adminTab == 0}}">
-    <view class="dashboard-grid">
-      <view class="dash-card"><text class="dash-num">28</text><text class="dash-label">今日订单</text><text class="dash-change up">↑15%</text></view>
-      <view class="dash-card"><text class="dash-num">¥3,280</text><text class="dash-label">今日收入</text><text class="dash-change up">↑8%</text></view>
-      <view class="dash-card"><text class="dash-num">46</text><text class="dash-label">陪诊员</text><text class="dash-change up">↑5人</text></view>
-      <view class="dash-card"><text class="dash-num">168</text><text class="dash-label">总用户</text><text class="dash-change up">↑23人</text></view>
-    </view>
+    <van-grid column-num="{{2}}" border="{{false}}" style="background:#fff;">
+      <van-grid-item use-button-slot>
+        <view class="dash-card"><text class="dash-num">28</text><text class="dash-label">今日订单</text><van-tag type="danger" size="mini">↑15%</van-tag></view>
+      </van-grid-item>
+      <van-grid-item use-button-slot>
+        <view class="dash-card"><text class="dash-num">¥3,280</text><text class="dash-label">今日收入</text><van-tag type="danger" size="mini">↑8%</van-tag></view>
+      </van-grid-item>
+      <van-grid-item use-button-slot>
+        <view class="dash-card"><text class="dash-num">46</text><text class="dash-label">陪诊员</text><van-tag type="success" size="mini">+5人</van-tag></view>
+      </van-grid-item>
+      <van-grid-item use-button-slot>
+        <view class="dash-card"><text class="dash-num">168</text><text class="dash-label">总用户</text><van-tag type="success" size="mini">+23人</van-tag></view>
+      </van-grid-item>
+    </van-grid>
 
-    <view class="data-section">
-      <text class="ds-title">订单状态分析</text>
-      <view class="ds-chart">
-        <view class="chart-bar"><view class="cb-fill" style="width: 70%;"></view><text class="cb-label">待服务 70%</text></view>
-        <view class="chart-bar"><view class="cb-fill" style="width: 50%; background: #1890ff;"></view><text class="cb-label">服务中 50%</text></view>
-        <view class="chart-bar"><view class="cb-fill" style="width: 30%; background: #52c41a;"></view><text class="cb-label">已完成 30%</text></view>
-      </view>
-    </view>
-
-    <view class="quick-stats">
-      <view class="qs-card" bindtap="switchTab" data-index="1"><text class="qs-num">3</text><text class="qs-label">待审核陪诊员</text></view>
-      <view class="qs-card" bindtap="switchTab" data-index="2"><text class="qs-num">5</text><text class="qs-label">待处理订单</text></view>
-    </view>
+    <van-cell-group title="待处理">
+      <van-cell title="待审核陪诊员" value="3人" is-link />
+      <van-cell title="待处理订单" value="5单" is-link />
+    </van-cell-group>
   </view>
 
   <!-- 陪诊员管理 -->
   <view wx:if="{{adminTab == 1}}">
-    <view class="search-row">
-      <input class="admin-search" placeholder="🔍 搜索陪诊员" />
-    </view>
-    <view class="staff-card" wx:for="{{staffList}}" wx:key="id">
-      <view class="sc-header">
-        <view class="sc-avatar">{{item.name[0]}}</view>
-        <view class="sc-info"><text class="sc-name">{{item.name}}</text><text class="sc-status {{item.statusClass}}">{{item.status}}</text></view>
-        <text class="sc-rating">{{item.rating}}分</text>
+    <van-search placeholder="搜索陪诊员" />
+    <van-swipe-cell wx:for="{{staffList}}" wx:key="id" right-width="{{140}}">
+      <van-cell center>
+        <view slot="title">
+          <text>{{item.name}}</text>
+          <van-tag size="mini" type="{{item.statusClass == 'verified' ? 'success' : 'warning'}}" style="margin-left:8rpx;">{{item.status}}</van-tag>
+        </view>
+        <view slot="label">服务{{item.count}}次 · {{item.area}} · {{item.rating}}分</view>
+        <view slot="right-icon" wx:if="{{item.statusClass == 'pending'}}">
+          <van-button type="success" size="mini" bind:click="approveStaff">通过</van-button>
+        </view>
+      </van-cell>
+      <view slot="right">
+        <van-button type="danger" size="small">拒绝</van-button>
       </view>
-      <view class="sc-data">
-        <text class="sc-count">服务：{{item.count}}次</text>
-        <text class="sc-area">{{item.area}}</text>
-      </view>
-      <view class="sc-actions" wx:if="{{item.status == '待审核'}}">
-        <button class="btn-approve" bindtap="approveStaff">通过</button>
-        <button class="btn-reject" bindtap="rejectStaff">拒绝</button>
-      </view>
-    </view>
+    </van-swipe-cell>
   </view>
 
   <!-- 订单管理 -->
   <view wx:if="{{adminTab == 2}}">
-    <view class="data-section">
-      <view class="order-card" wx:for="{{allOrders}}" wx:key="id">
-        <view class="oc-header2">
-          <text class="oc-id">#{{item.id}}</text>
-          <text class="oc-status {{item.statusClass}}">{{item.statusText}}</text>
-        </view>
-        <text class="oc-detail">{{item.hospital}} · {{item.dept}} · {{item.date}}</text>
-        <text class="oc-detail">患者：{{item.patient}} | 陪诊员：{{item.escort}}</text>
-        <text class="oc-detail">金额：¥{{item.price}}</text>
+    <van-cell wx:for="{{allOrders}}" wx:key="id">
+      <view slot="title">
+        <text>#{{item.id}} {{item.hospital}}</text>
+        <van-tag size="mini" type="{{item.statusClass == 'done' ? 'success' : item.statusClass == 'ongoing' ? 'primary' : 'warning'}}" style="margin-left:8rpx;">{{item.statusText}}</van-tag>
       </view>
-    </view>
+      <view slot="label">{{item.dept}} · {{item.date}} · {{item.patient}} · 陪诊员：{{item.escort}}</view>
+      <view slot="value" style="color:#ee0a24;">¥{{item.price}}</view>
+    </van-cell>
   </view>
 
   <!-- 用户管理 -->
   <view wx:if="{{adminTab == 3}}">
-    <view class="search-row">
-      <input class="admin-search" placeholder="🔍 搜索用户" />
-    </view>
-    <view class="user-card" wx:for="{{userList}}" wx:key="id">
-      <view class="uc-avatar">{{item.name[0]}}</view>
-      <view class="uc-info">
-        <text class="uc-name">{{item.name}}</text>
-        <text class="uc-phone">{{item.phone}}</text>
-      </view>
-      <text class="uc-orders">{{item.orders}}次预约</text>
-    </view>
+    <van-search placeholder="搜索用户" />
+    <van-cell wx:for="{{userList}}" wx:key="id">
+      <view slot="title">{{item.name}}</view>
+      <view slot="label">{{item.phone}}</view>
+      <view slot="value">{{item.orders}}次预约</view>
+    </van-cell>
   </view>
 </view>

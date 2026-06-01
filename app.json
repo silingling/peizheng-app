@@ -16,11 +16,11 @@
   "window": {
     "navigationBarTitleText": "陪诊预约",
     "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "#1aad8a"
+    "navigationBarBackgroundColor": "#07c160"
   },
   "tabBar": {
     "color": "#999",
-    "selectedColor": "#1aad8a",
+    "selectedColor": "#07c160",
     "backgroundColor": "#fff",
     "borderStyle": "black",
     "list": [
@@ -37,6 +37,38 @@
         "text": "我的"
       }
     ]
+  },
+  "usingComponents": {
+    "van-icon": "@vant/weapp/icon/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-panel": "@vant/weapp/panel/index",
+    "van-card": "@vant/weapp/card/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-steps": "@vant/weapp/steps/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index",
+    "van-goods-action": "@vant/weapp/goods-action/index",
+    "van-goods-action-icon": "@vant/weapp/goods-action-icon/index",
+    "van-goods-action-button": "@vant/weapp/goods-action-button/index",
+    "van-rate": "@vant/weapp/rate/index",
+    "van-progress": "@vant/weapp/progress/index",
+    "van-skeleton": "@vant/weapp/skeleton/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

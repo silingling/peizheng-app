@@ -1,104 +1,22 @@
-page { background-color: #f5f7fa; }
-.container { padding: 0; padding-bottom: 100rpx; }
+page { background: #f7f8fa; }
 
-/* 搜索栏 */
-.search-bar {
-  background: #1aad8a;
-  padding: 16rpx 24rpx;
-  display: flex;
-  align-items: center;
-}
-.search-icon { font-size: 28rpx; margin-right: 12rpx; }
-.search-text {
-  flex: 1;
-  background: rgba(255,255,255,0.2);
-  padding: 16rpx 24rpx;
-  font-size: 26rpx;
-  color: rgba(255,255,255,0.8);
-}
+.banner-swipe { height: 360rpx; }
+.banner-item { height: 360rpx; padding: 60rpx 40rpx; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
+.banner-title { font-size: 40rpx; font-weight: bold; color: #fff; display: block; }
+.banner-desc { font-size: 26rpx; color: rgba(255,255,255,0.85); margin-top: 12rpx; display: block; }
+.banner-tag { margin-top: 16rpx; align-self: flex-start; }
 
-/* Banner轮播 */
-.banner-swiper { height: 320rpx; }
-.banner-slide { height: 320rpx; display: flex; align-items: center; justify-content: center; }
-.banner-content { text-align: center; }
-.banner-title { font-size: 38rpx; font-weight: bold; color: #fff; display: block; }
-.banner-desc { font-size: 24rpx; color: rgba(255,255,255,0.85); margin-top: 12rpx; display: block; }
-.banner-tag {
-  display: inline-block;
-  background: rgba(255,255,255,0.2);
-  padding: 6rpx 20rpx;
-  font-size: 22rpx;
-  color: #fff;
-  margin-top: 16rpx;
-}
-
-/* 数据统计 */
-.stats-row {
-  display: flex;
-  background: #fff;
-  padding: 24rpx 0;
-}
-.stat-item { flex: 1; text-align: center; }
-.stat-num { font-size: 36rpx; font-weight: bold; color: #1aad8a; display: block; }
+.stats-row { display: flex; background: #fff; padding: 20rpx 0; }
+.stats-item { flex: 1; text-align: center; }
+.stat-num { font-size: 34rpx; font-weight: bold; color: #07c160; display: block; }
 .stat-label { font-size: 22rpx; color: #999; margin-top: 4rpx; display: block; }
 
-/* 通用 */
-.section { padding: 30rpx 24rpx 0; }
-.section-title { font-size: 32rpx; font-weight: 600; color: #333; display: block; margin-bottom: 24rpx; }
+.section-wrap { background: #fff; margin-top: 12rpx; padding: 8rpx 0; }
+.section-header { padding: 20rpx 16rpx 8rpx; }
+.section-title { font-size: 30rpx; font-weight: 600; color: #333; }
 
-/* 快捷服务格子 */
-.quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16rpx; }
-.quick-item {
-  background: #fff;
-  padding: 28rpx;
-  text-align: center;
-  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.04);
-}
-.qi-icon { font-size: 48rpx; display: block; }
-.qi-label { font-size: 28rpx; font-weight: 600; color: #333; margin-top: 12rpx; display: block; }
-.qi-desc { font-size: 22rpx; color: #999; margin-top: 4rpx; display: block; }
-
-/* 热门医院横向滑动 */
-.hospital-scroll { white-space: nowrap; }
-.hospital-card {
-  display: inline-block;
-  width: 260rpx;
-  background: #fff;
-  padding: 24rpx;
-  margin-right: 16rpx;
-  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.04);
-}
-.hc-name { font-size: 26rpx; font-weight: 600; color: #333; display: block; }
-.hc-addr { font-size: 22rpx; color: #999; margin-top: 6rpx; display: block; }
-.hc-count { font-size: 22rpx; color: #1aad8a; margin-top: 6rpx; display: block; }
-
-/* 服务优势 */
-.advantages { display: flex; gap: 16rpx; }
-.adv-item {
-  flex: 1; background: #fff; padding: 28rpx 16rpx; text-align: center;
-  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.04);
-}
-.adv-icon { font-size: 48rpx; display: block; }
-.adv-title { font-size: 26rpx; font-weight: 600; color: #333; margin-top: 10rpx; display: block; }
-.adv-desc { font-size: 22rpx; color: #999; margin-top: 4rpx; display: block; }
-
-/* 底部入口 */
-.bottom-entries {
-  display: flex;
-  gap: 2rpx;
-  padding: 24rpx;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #f5f7fa;
-}
-.entry-btn {
-  flex: 1;
-  text-align: center;
-  background: #fff;
-  padding: 20rpx 0;
-  font-size: 26rpx;
-  color: #333;
-}
-.entry-btn.admin { color: #1aad8a; }
+.hosp-scroll { white-space: nowrap; padding: 0 16rpx 20rpx; }
+.hosp-card { display: inline-flex; flex-direction: column; background: #f7f8fa; padding: 20rpx; margin-right: 16rpx; width: 280rpx; }
+.hosp-name { font-size: 26rpx; font-weight: 600; color: #333; }
+.hosp-addr { font-size: 22rpx; color: #999; margin: 6rpx 0; }
+.grid-sub { font-size: 20rpx; color: #999; display: block; text-align: center; margin-top: -10rpx; }

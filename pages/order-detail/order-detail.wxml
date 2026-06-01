@@ -1,72 +1,42 @@
-<view class="container">
-  <!-- 进度状态卡片 -->
-  <view class="progress-card">
-    <view class="progress-steps">
-      <view class="p-step {{order.progress >= 1 ? 'done' : ''}}">
-        <view class="p-dot">{{order.progress >= 1 ? '✓' : '1'}}</view>
-        <text class="p-label">已接单</text>
-      </view>
-      <view class="p-line {{order.progress >= 2 ? 'done' : ''}}"></view>
-      <view class="p-step {{order.progress >= 2 ? 'done' : ''}}">
-        <view class="p-dot">{{order.progress >= 2 ? '✓' : '2'}}</view>
-        <text class="p-label">已报到</text>
-      </view>
-      <view class="p-line {{order.progress >= 3 ? 'done' : ''}}"></view>
-      <view class="p-step {{order.progress >= 3 ? 'done' : ''}}">
-        <view class="p-dot">{{order.progress >= 3 ? '✓' : '3'}}</view>
-        <text class="p-label">候诊中</text>
-      </view>
-      <view class="p-line {{order.progress >= 4 ? 'done' : ''}}"></view>
-      <view class="p-step {{order.progress >= 4 ? 'done' : ''}}">
-        <view class="p-dot">{{order.progress >= 4 ? '✓' : '4'}}</view>
-        <text class="p-label">面诊中</text>
-      </view>
-      <view class="p-line {{order.progress >= 5 ? 'done' : ''}}"></view>
-      <view class="p-step {{order.progress >= 5 ? 'done' : ''}}">
-        <view class="p-dot">{{order.progress >= 5 ? '✓' : '5'}}</view>
-        <text class="p-label">已完成</text>
-      </view>
-    </view>
-    <text class="progress-status">当前状态：{{order.statusText}}</text>
-    <text class="progress-time" wx:if="{{order.statusTime}}">{{order.statusTime}}</text>
-  </view>
+<view class="page">
+  <!-- 进度条 -->
+  <van-steps steps="{{progressSteps}}" active="{{order.progress}}" active-color="#07c160" />
 
   <!-- 陪诊员信息 -->
-  <view class="section-card">
-    <text class="card-title">陪诊员信息</text>
-    <view class="escort-info">
-      <view class="ei-avatar">{{order.escortName[0]}}</view>
-      <view class="ei-detail">
-        <text class="ei-name">{{order.escortName}}</text>
-        <text class="ei-data">服务{{order.escortCount}}次 · {{order.escortRating}}分</text>
+  <van-cell-group title="陪诊员信息">
+    <van-cell center>
+      <view slot="icon" class="escort-avatar">{{order.escortName[0]}}</view>
+      <view slot="title">
+        <text style="font-weight:600">{{order.escortName}}</text>
+        <van-tag type="success" size="mini" style="margin-left:8rpx;">服务{{order.escortCount}}次</van-tag>
       </view>
-      <view class="ei-actions">
-        <view class="ei-btn call" bindtap="callEscort">📞</view>
-        <view class="ei-btn msg" bindtap="msgEscort">💬</view>
+      <view slot="label">
+        <van-rate value="{{order.escortRating}}" size="12" readonly />
       </view>
-    </view>
-  </view>
+      <view slot="right-icon" class="escort-actions">
+        <van-icon name="phone-o" size="20" color="#07c160" bind:click="callEscort" />
+        <van-icon name="chat-o" size="20" color="#1989fa" style="margin-left:16rpx;" bind:click="msgEscort" />
+      </view>
+    </van-cell>
+  </van-cell-group>
 
   <!-- 就诊信息 -->
-  <view class="section-card">
-    <text class="card-title">就诊信息</text>
-    <view class="info-row"><text class="ir-label">服务类型</text><text class="ir-value">{{order.serviceType}}</text></view>
-    <view class="info-row"><text class="ir-label">就诊医院</text><text class="ir-value">{{order.hospital}}</text></view>
-    <view class="info-row"><text class="ir-label">就诊科室</text><text class="ir-value">{{order.dept}}</text></view>
-    <view class="info-row"><text class="ir-label">就诊时间</text><text class="ir-value">{{order.date}} {{order.time}}</text></view>
-    <view class="info-row"><text class="ir-label">就诊人</text><text class="ir-value">{{order.patientName}}</text></view>
-  </view>
+  <van-cell-group title="就诊信息">
+    <van-cell title="服务类型" value="{{order.serviceType}}" />
+    <van-cell title="就诊医院" value="{{order.hospital}}" />
+    <van-cell title="就诊科室" value="{{order.dept}}" />
+    <van-cell title="就诊时间" value="{{order.date}} {{order.time}}" />
+    <van-cell title="就诊人" value="{{order.patientName}}" />
+  </van-cell-group>
 
-  <!-- 费用明细 -->
-  <view class="section-card">
-    <text class="card-title">费用明细</text>
-    <view class="info-row"><text class="ir-label">服务费</text><text class="ir-value">¥{{order.price}}</text></view>
-    <view class="info-row total"><text class="ir-label">合计</text><text class="ir-value">¥{{order.price}}</text></view>
-  </view>
+  <!-- 费用 -->
+  <van-cell-group title="费用明细">
+    <van-cell title="服务费" value="{{'¥' + order.price}}" />
+    <van-cell title="合计" value="{{'¥' + order.price}}" title-class="total-label" value-class="total-value" />
+  </van-cell-group>
 
-  <!-- 底部操作 -->
   <view class="action-bar">
-    <button class="ab-cancel" wx:if="{{order.progress < 2}}" bindtap="cancelOrder">取消订单</button>
-    <button class="ab-cs" bindtap="contactCS">联系客服</button>
+    <van-button wx:if="{{order.progress < 2}}" type="danger" plain bind:click="cancelOrder" class="act-btn">取消订单</van-button>
+    <van-button type="primary" bind:click="contactCS" class="act-btn">联系客服</van-button>
   </view>
 </view>

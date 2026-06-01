@@ -1,28 +1,7 @@
-page { background-color: #f5f7fa; }
-.container { padding: 20rpx 0; }
-
-.income-header { display: flex; background: #fff; padding: 32rpx 20rpx; margin-bottom: 2rpx; }
-.ih-item { flex: 1; text-align: center; }
-.ih-label { font-size: 24rpx; color: #999; display: block; }
-.ih-amount { font-size: 36rpx; font-weight: bold; color: #333; margin-top: 8rpx; display: block; }
-.ih-amount.red { color: #ff4d4f; }
-.ih-divider { width: 2rpx; background: #f0f0f0; }
-
-.withdraw-card { background: #fff; padding: 32rpx; text-align: center; margin-bottom: 20rpx; }
-.wc-title { font-size: 28rpx; color: #999; display: block; }
-.wc-amount { font-size: 56rpx; font-weight: bold; color: #333; margin-top: 12rpx; display: block; }
-.wc-tip { font-size: 24rpx; color: #ccc; margin-top: 8rpx; display: block; }
-.btn-withdraw { background: linear-gradient(135deg, #1aad8a, #20c997); color: #fff; width: 400rpx; height: 80rpx; line-height: 80rpx; font-size: 30rpx; margin-top: 24rpx; }
-button::after { border: none; }
-
-.section-title { font-size: 30rpx; font-weight: 600; color: #333; display: block; padding: 0 24rpx 16rpx; }
-
-.income-item { background: #fff; padding: 24rpx; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rpx; }
-.ii-left { flex: 1; }
-.ii-title { font-size: 26rpx; color: #333; display: block; }
-.ii-time { font-size: 22rpx; color: #999; margin-top: 4rpx; display: block; }
-.ii-right { text-align: right; }
-.ii-price { font-size: 30rpx; font-weight: 600; color: #333; display: block; }
-.ii-status { font-size: 22rpx; margin-top: 4rpx; display: block; }
-.ii-status.settled { color: #52c41a; }
-.ii-status.pending { color: #fa8c16; }
+page { background: #f7f8fa; }
+.income-header { display: flex; background: #fff; padding: 40rpx 20rpx; margin-bottom: 2rpx; }
+.inc-item { flex: 1; text-align: center; }
+.inc-label { font-size: 24rpx; color: #999; display: block; }
+.inc-num { font-size: 40rpx; font-weight: bold; color: #333; margin-top: 8rpx; display: block; }
+.inc-num.red { color: #ee0a24; }
+.inc-divider { width: 2rpx; background: #f0f0f0; }

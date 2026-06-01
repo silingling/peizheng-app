@@ -10,19 +10,16 @@ Page({
     allOrders: [
       { id: 1001, hospital: '北京协和医院', dept: '内科', date: '06-01', patient: '张先生', escort: '王阿姨', price: 280, statusText: '待服务', statusClass: 'pending' },
       { id: 1002, hospital: '北医三院', dept: '骨科', date: '05-30', patient: '李阿姨', escort: '李师傅', price: 320, statusText: '进行中', statusClass: 'ongoing' },
-      { id: 1003, hospital: '北京天坛医院', dept: '神经外科', date: '05-28', patient: '赵大爷', escort: '刘大姐', price: 300, statusText: '已完成', statusClass: 'done' },
-      { id: 1004, hospital: '北京协和医院', dept: '心内科', date: '05-25', patient: '王叔叔', escort: '王阿姨', price: 280, statusText: '已完成', statusClass: 'done' },
-      { id: 1005, hospital: '中国人民解放军总医院', dept: '眼科', date: '05-22', patient: '孙奶奶', escort: '李师傅', price: 250, statusText: '已完成', statusClass: 'done' }
+      { id: 1003, hospital: '北京天坛医院', dept: '神经科', date: '05-28', patient: '赵大爷', escort: '刘大姐', price: 300, statusText: '已完成', statusClass: 'done' },
+      { id: 1004, hospital: '北京协和医院', dept: '心内科', date: '05-25', patient: '王叔叔', escort: '王阿姨', price: 280, statusText: '已完成', statusClass: 'done' }
     ],
     userList: [
       { id: 1, name: '张先生', phone: '138****1234', orders: 3 },
       { id: 2, name: '李阿姨', phone: '139****5678', orders: 5 },
       { id: 3, name: '王叔叔', phone: '136****9012', orders: 1 },
-      { id: 4, name: '赵大爷', phone: '135****3456', orders: 2 },
-      { id: 5, name: '孙奶奶', phone: '137****7890', orders: 4 }
+      { id: 4, name: '赵大爷', phone: '135****3456', orders: 2 }
     ]
   },
-  switchTab(e) { this.setData({ adminTab: e.currentTarget.dataset.index }) },
-  approveStaff() { wx.showToast({ title: '已通过审核', icon: 'success' }) },
-  rejectStaff() { wx.showToast({ title: '已拒绝', icon: 'none' }) }
+  switchTab(e) { this.setData({ adminTab: e.detail.index }) },
+  approveStaff() { wx.showToast({ title: '已通过审核', icon: 'success' }) }
 })

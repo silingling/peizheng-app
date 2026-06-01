@@ -1,33 +1,31 @@
-<view class="container">
-  <view class="tabs">
-    <view class="tab {{tab == 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">全部</view>
-    <view class="tab {{tab == 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">待服务</view>
-    <view class="tab {{tab == 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">进行中</view>
-    <view class="tab {{tab == 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3">已完成</view>
-  </view>
+<view class="page">
+  <van-tabs active="{{tab}}" bind:change="switchTab">
+    <van-tab title="全部"> </van-tab>
+    <van-tab title="待服务"> </van-tab>
+    <van-tab title="进行中"> </van-tab>
+    <van-tab title="已完成"> </van-tab>
+  </van-tabs>
 
-  <view class="empty" wx:if="{{filteredOrders.length == 0}}">
-    <text class="empty-icon">📋</text>
-    <text class="empty-text">暂无订单</text>
-    <text class="empty-desc">去首页预约陪诊服务吧</text>
-    <button class="btn-go" bindtap="goHome">去预约</button>
-  </view>
+  <van-empty wx:if="{{filteredOrders.length == 0}}" description="暂无订单" />
 
-  <view class="order-list" wx:else>
-    <view class="order-card" wx:for="{{filteredOrders}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
-      <view class="order-header">
-        <view class="oh-left">
-          <text class="order-hospital">{{item.hospital}}</text>
-          <text class="order-id">#{{item.id}}</text>
+  <view wx:else>
+    <view class="order-card" wx:for="{{filteredOrders}}" wx:key="id" data-id="{{item.id}}" bindtap="goDetail" wx:for-item="o">
+      <van-card
+        num="1"
+        price="{{o.price}}"
+        title="{{o.hospital}}"
+        desc="{{o.dept}} · {{o.date}} {{o.time}}"
+        tag="{{o.serviceType}}"
+      >
+        <view slot="tags">
+          <van-tag type="{{o.statusClass == 'done' ? 'success' : o.statusClass == 'ongoing' ? 'primary' : 'warning'}}" size="mini">{{o.statusText}}</van-tag>
         </view>
-        <text class="order-status {{item.statusClass}}">{{item.statusText}}</text>
-      </view>
-      <view class="order-body">
-        <view class="order-info"><text class="info-label">科室</text><text class="info-value">{{item.dept}}</text></view>
-        <view class="order-info"><text class="info-label">时间</text><text class="info-value">{{item.date}} {{item.time}}</text></view>
-        <view class="order-info"><text class="info-label">陪诊员</text><text class="info-value">{{item.escort}}</text></view>
-        <view class="order-info" wx:if="{{item.serviceType}}"><text class="info-label">服务</text><text class="info-value">{{item.serviceType}}</text></view>
-      </view>
+        <view slot="footer">
+          <text class="card-escort">👤 {{o.escort}}</text>
+        </view>
+      </van-card>
     </view>
   </view>
+
+  <view class="order-count">共 {{filteredOrders.length}} 条订单</view>
 </view>

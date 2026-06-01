@@ -1,55 +1,9 @@
-page { background-color: #f5f7fa; }
-.container { padding: 20rpx 0; padding-bottom: 160rpx; }
-.steps { display: flex; align-items: center; justify-content: center; padding: 40rpx 0; }
-.step { text-align: center; }
-.step-num { width: 50rpx; height: 50rpx; border-radius: 50%; background: #ddd; color: #fff; font-size: 26rpx; display: flex; align-items: center; justify-content: center; margin: 0 auto 8rpx; }
-.step.active .step-num { background: #1aad8a; }
-.step text { font-size: 24rpx; color: #999; }
-.step.active text { color: #1aad8a; }
-.step-line { width: 60rpx; height: 4rpx; background: #ddd; margin: 0 12rpx; margin-bottom: 40rpx; }
-.step-line.active { background: #1aad8a; }
-.section-title { font-size: 30rpx; font-weight: 600; color: #333; display: block; margin-bottom: 16rpx; padding: 0 24rpx; }
-.search-input { background: #fff; padding: 20rpx 24rpx; font-size: 28rpx; border-bottom: 2rpx solid #f0f0f0; }
-.tag-group { display: flex; flex-wrap: wrap; gap: 12rpx; padding: 0 24rpx; }
-.tag { background: #fff; padding: 14rpx 28rpx; font-size: 26rpx; color: #666; border: 2rpx solid #eee; }
-.tag.active { background: #e8faf0; color: #1aad8a; border-color: #1aad8a; }
-.date-list { display: flex; gap: 12rpx; padding: 0 24rpx; margin-bottom: 20rpx; }
-.date-item { background: #fff; padding: 14rpx 20rpx; text-align: center; border: 2rpx solid #eee; flex: 1; }
-.date-item.active { background: #e8faf0; border-color: #1aad8a; }
-.date-week { font-size: 22rpx; color: #999; display: block; }
-.date-day { font-size: 28rpx; font-weight: 600; color: #333; display: block; margin-top: 4rpx; }
-
-/* 就诊人选择 */
-.patient-select { padding: 0 24rpx; }
-.patient-option { background: #fff; padding: 24rpx; display: flex; align-items: center; margin-bottom: 2rpx; }
-.po-name { font-size: 28rpx; font-weight: 600; color: #333; flex: 1; }
-.po-phone { font-size: 24rpx; color: #999; margin-right: 16rpx; }
-.po-check { width: 32rpx; height: 32rpx; border-radius: 50%; border: 3rpx solid #ddd; }
-.po-check.checked { background: #1aad8a; border-color: #1aad8a; }
-.patient-add { background: #f0faf5; padding: 20rpx; text-align: center; font-size: 28rpx; color: #1aad8a; margin-top: 2rpx; }
-
-/* 列表项单选 */
-.list-items { padding: 0 24rpx; }
-.list-item { background: #fff; padding: 20rpx 24rpx; display: flex; align-items: center; margin-bottom: 2rpx; }
-.li-name { font-size: 28rpx; font-weight: 600; color: #333; flex: 1; }
-.li-sub { font-size: 22rpx; color: #999; margin-right: 16rpx; }
-.li-check { width: 32rpx; height: 32rpx; border-radius: 50%; border: 3rpx solid #ddd; }
-.li-check.checked { background: #1aad8a; border-color: #1aad8a; }
-
-/* 确认订单 */
-.confirm-card { background: #fff; padding: 24rpx; margin: 0 24rpx; }
-.confirm-row { display: flex; padding: 14rpx 0; border-bottom: 2rpx solid #f5f5f5; }
-.confirm-row:last-child { border: none; }
-.cr-label { font-size: 28rpx; color: #999; width: 140rpx; }
-.cr-value { font-size: 28rpx; color: #333; flex: 1; }
-.form-textarea { width: 100%; height: 140rpx; font-size: 28rpx; background: #fff; padding: 20rpx 24rpx; box-sizing: border-box; }
-.price-card { background: #fff; padding: 24rpx; display: flex; justify-content: space-between; align-items: center; margin: 20rpx 24rpx 0; }
-.price-label { font-size: 28rpx; color: #333; }
-.price-value { font-size: 40rpx; font-weight: bold; color: #ff4d4f; }
-
-/* 按钮 */
-.btn-area { display: flex; gap: 16rpx; margin-top: 40rpx; padding: 0 24rpx; }
-.btn-prev { flex: 1; background: #fff; color: #333; border: 2rpx solid #ddd; height: 88rpx; line-height: 88rpx; font-size: 30rpx; }
-.btn-submit { flex: 2; background: #1aad8a; color: #fff; height: 88rpx; line-height: 88rpx; font-size: 30rpx; }
-.btn-submit.final { background: linear-gradient(135deg, #1aad8a, #20c997); }
-button::after { border: none; }
+page { background: #f7f8fa; }
+.page { padding-bottom: 140rpx; }
+.btn-wrap { display: flex; gap: 16rpx; padding: 40rpx 16rpx; position: fixed; bottom: 0; left: 0; right: 0; background: #fff; }
+.btn-half { flex: 1; }
+.desc-wrap { padding: 16rpx; }
+.desc-input { width: 100%; height: 120rpx; font-size: 28rpx; }
+.price-label { font-size: 28rpx; font-weight: 600; }
+.price-value { font-size: 36rpx; font-weight: bold; color: #ee0a24; }
+.add-title { color: #07c160; text-align: center !important; }
