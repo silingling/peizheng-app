@@ -1,75 +1,108 @@
 <view class="container">
-  <!-- Banner区域 -->
-  <view class="banner">
-    <text class="banner-title">专业陪诊，暖心相伴</text>
-    <text class="banner-desc">从挂号到取药，全程陪护，让就医不再孤单</text>
-    <view class="banner-stats">
-      <view class="banner-stat">
-        <text class="bs-num">500+</text>
-        <text class="bs-label">服务患者</text>
+  <!-- 顶部搜索 -->
+  <view class="search-bar" bindtap="goPatient">
+    <text class="search-icon">🔍</text>
+    <text class="search-text">搜索医院、科室...</text>
+  </view>
+
+  <!-- Banner轮播 -->
+  <view class="banner-swiper">
+    <swiper autoplay circular interval="3000" indicator-dots indicator-color="rgba(255,255,255,0.4)" indicator-active-color="#fff">
+      <swiper-item wx:for="{{banners}}" wx:key="index">
+        <view class="banner-slide" style="background: {{item.bg}};">
+          <view class="banner-content">
+            <text class="banner-title">{{item.title}}</text>
+            <text class="banner-desc">{{item.desc}}</text>
+            <text class="banner-tag">{{item.tag}}</text>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 平台数据 -->
+  <view class="stats-row">
+    <view class="stat-item">
+      <text class="stat-num">500+</text>
+      <text class="stat-label">服务患者</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-num">50+</text>
+      <text class="stat-label">合作医院</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-num">98%</text>
+      <text class="stat-label">好评率</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-num">7×24</text>
+      <text class="stat-label">全天服务</text>
+    </view>
+  </view>
+
+  <!-- 快捷服务 -->
+  <view class="section">
+    <text class="section-title">快捷服务</text>
+    <view class="quick-grid">
+      <view class="quick-item" bindtap="goPatient">
+        <text class="qi-icon">🏥</text>
+        <text class="qi-label">就医陪诊</text>
+        <text class="qi-desc">全程陪同就诊</text>
       </view>
-      <view class="banner-stat">
-        <text class="bs-num">50+</text>
-        <text class="bs-label">合作医院</text>
+      <view class="quick-item" bindtap="goSubstitute">
+        <text class="qi-icon">📋</text>
+        <text class="qi-label">代办服务</text>
+        <text class="qi-desc">代取药/代取报告</text>
       </view>
-      <view class="banner-stat">
-        <text class="bs-num">98%</text>
-        <text class="bs-label">好评率</text>
+      <view class="quick-item" bindtap="goNurse">
+        <text class="qi-icon">👩‍⚕️</text>
+        <text class="qi-label">护士到家</text>
+        <text class="qi-desc">上门护理服务</text>
+      </view>
+      <view class="quick-item" bindtap="goHospice">
+        <text class="qi-icon">🚑</text>
+        <text class="qi-label">转运护送</text>
+        <text class="qi-desc">非急救转运</text>
       </view>
     </view>
   </view>
 
-  <!-- 角色入口 -->
+  <!-- 热门医院 -->
   <view class="section">
-    <text class="section-title">选择您的身份</text>
-    
-    <view class="role-card" bindtap="goPatient">
-      <view class="role-icon">🏥</view>
-      <view class="role-info">
-        <text class="role-name">就医陪诊</text>
-        <text class="role-desc">我需要陪诊服务</text>
+    <text class="section-title">热门医院</text>
+    <scroll-view class="hospital-scroll" scroll-x>
+      <view class="hospital-card" wx:for="{{hospitals}}" wx:key="id" bindtap="goPatient">
+        <text class="hc-name">{{item.name}}</text>
+        <text class="hc-addr">{{item.shortAddr}}</text>
+        <text class="hc-count">已服务{{item.count}}人</text>
       </view>
-      <text class="arrow">›</text>
-    </view>
-
-    <view class="role-card" bindtap="goEscort">
-      <view class="role-icon">👨‍⚕️</view>
-      <view class="role-info">
-        <text class="role-name">陪诊员端</text>
-        <text class="role-desc">我是专业陪诊师</text>
-      </view>
-      <text class="arrow">›</text>
-    </view>
-
-    <view class="role-card" bindtap="goAdmin">
-      <view class="role-icon">📊</view>
-      <view class="role-info">
-        <text class="role-name">管理端</text>
-        <text class="role-desc">平台运营管理</text>
-      </view>
-      <text class="arrow">›</text>
-    </view>
+    </scroll-view>
   </view>
 
   <!-- 为什么选择我们 -->
   <view class="section">
-    <text class="section-title">为什么选择我们</text>
     <view class="advantages">
       <view class="adv-item">
         <text class="adv-icon">⏱️</text>
         <text class="adv-title">节省时间</text>
-        <text class="adv-desc">陪诊员熟悉流程，减少等候</text>
+        <text class="adv-desc">熟悉流程减少等候</text>
       </view>
       <view class="adv-item">
         <text class="adv-icon">🤝</text>
         <text class="adv-title">专业可靠</text>
-        <text class="adv-desc">实名认证，经验丰富</text>
+        <text class="adv-desc">实名认证经验丰富</text>
       </view>
       <view class="adv-item">
         <text class="adv-icon">💛</text>
         <text class="adv-title">贴心周到</text>
-        <text class="adv-desc">全程陪同，情绪安抚</text>
+        <text class="adv-desc">全程陪同情绪安抚</text>
       </view>
     </view>
   </view>
+</view>
+
+<!-- 底部导航 - 管理员/陪诊员入口 -->
+<view class="bottom-entries">
+  <view class="entry-btn" bindtap="goEscort">👨‍⚕️ 陪诊员端</view>
+  <view class="entry-btn admin" bindtap="goAdmin">📊 管理端</view>
 </view>

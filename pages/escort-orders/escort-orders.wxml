@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="tabs">
+    <view class="tab {{tab == 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">待服务</view>
+    <view class="tab {{tab == 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">服务中</view>
+    <view class="tab {{tab == 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">已完成</view>
+  </view>
+
+  <view class="empty" wx:if="{{orders.length == 0}}">
+    <text class="empty-icon">📋</text>
+    <text class="empty-text">暂无订单</text>
+    <text class="empty-desc">去接单大厅查看可接订单</text>
+  </view>
+
+  <view class="order-card" wx:for="{{orders}}" wx:key="id" wx:else>
+    <view class="order-header">
+      <text class="oc-hospital">{{item.hospital}}</text>
+      <text class="oc-status {{item.statusClass}}">{{item.statusText}}</text>
+    </view>
+    <view class="order-body">
+      <text class="oc-detail">{{item.dept}} · {{item.date}} {{item.time}}</text>
+      <text class="oc-patient">患者：{{item.patient}} · {{item.patientAge}}</text>
+      <text class="oc-desc" wx:if="{{item.desc}}">备注：{{item.desc}}</text>
+    </view>
+    <view class="order-actions">
+      <view class="oa-btn call" bindtap="callPatient">📞 联系</view>
+      <view class="oa-btn primary" bindtap="startService" wx:if="{{tab == 0}}">开始服务</view>
+      <view class="oa-btn primary" bindtap="completeService" wx:if="{{tab == 1}}">完成服务</view>
+    </view>
+  </view>
+</view>

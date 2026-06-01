@@ -1,0 +1,66 @@
+<view class="container">
+  <view class="section-title">我的就诊人</view>
+
+  <view class="patient-card" wx:for="{{patients}}" wx:key="id">
+    <view class="pc-header">
+      <view class="pc-avatar">{{item.name[0]}}</view>
+      <view class="pc-info">
+        <text class="pc-name">{{item.name}}</text>
+        <text class="pc-relation">{{item.relation}} · {{item.gender}} · {{item.age}}岁</text>
+      </view>
+      <text class="pc-phone">{{item.phone}}</text>
+    </view>
+    <view class="pc-actions">
+      <view class="pca-btn" bindtap="editPatient" data-id="{{item.id}}">✏️ 编辑</view>
+      <view class="pca-btn del" bindtap="deletePatient" data-id="{{item.id}}">🗑 删除</view>
+    </view>
+  </view>
+
+  <view class="add-card" bindtap="addPatient">
+    <text class="add-icon">+</text>
+    <text class="add-text">添加就诊人</text>
+  </view>
+
+  <!-- 添加/编辑弹窗 -->
+  <view class="modal-overlay" wx:if="{{showModal}}">
+    <view class="modal-content">
+      <text class="modal-title">{{editMode == 'add' ? '添加就诊人' : '编辑就诊人'}}</text>
+      <view class="modal-form">
+        <view class="mf-group">
+          <text class="mf-label">姓名</text>
+          <input class="mf-input" value="{{form.name}}" placeholder="请输入姓名" bindinput="onFormName" />
+        </view>
+        <view class="mf-group">
+          <text class="mf-label">手机号</text>
+          <input class="mf-input" value="{{form.phone}}" placeholder="请输入手机号" type="number" bindinput="onFormPhone" />
+        </view>
+        <view class="mf-group">
+          <text class="mf-label">性别</text>
+          <view class="mf-options">
+            <view class="mfo {{form.gender == '男' ? 'active' : ''}}" bindtap="setGender" data-val="男">男</view>
+            <view class="mfo {{form.gender == '女' ? 'active' : ''}}" bindtap="setGender" data-val="女">女</view>
+          </view>
+        </view>
+        <view class="mf-group">
+          <text class="mf-label">年龄</text>
+          <input class="mf-input" value="{{form.age}}" placeholder="请输入年龄" type="number" bindinput="onFormAge" />
+        </view>
+        <view class="mf-group">
+          <text class="mf-label">关系</text>
+          <view class="mf-options">
+            <view class="mfo {{form.relation == '本人' ? 'active' : ''}}" bindtap="setRelation" data-val="本人">本人</view>
+            <view class="mfo {{form.relation == '配偶' ? 'active' : ''}}" bindtap="setRelation" data-val="配偶">配偶</view>
+            <view class="mfo {{form.relation == '母亲' ? 'active' : ''}}" bindtap="setRelation" data-val="母亲">母亲</view>
+            <view class="mfo {{form.relation == '父亲' ? 'active' : ''}}" bindtap="setRelation" data-val="父亲">父亲</view>
+            <view class="mfo {{form.relation == '子女' ? 'active' : ''}}" bindtap="setRelation" data-val="子女">子女</view>
+            <view class="mfo {{form.relation == '其他' ? 'active' : ''}}" bindtap="setRelation" data-val="其他">其他</view>
+          </view>
+        </view>
+      </view>
+      <view class="modal-actions">
+        <button class="ma-cancel" bindtap="closeModal">取消</button>
+        <button class="ma-save" bindtap="savePatient">保存</button>
+      </view>
+    </view>
+  </view>
+</view>

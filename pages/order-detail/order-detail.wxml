@@ -1,0 +1,72 @@
+<view class="container">
+  <!-- 进度状态卡片 -->
+  <view class="progress-card">
+    <view class="progress-steps">
+      <view class="p-step {{order.progress >= 1 ? 'done' : ''}}">
+        <view class="p-dot">{{order.progress >= 1 ? '✓' : '1'}}</view>
+        <text class="p-label">已接单</text>
+      </view>
+      <view class="p-line {{order.progress >= 2 ? 'done' : ''}}"></view>
+      <view class="p-step {{order.progress >= 2 ? 'done' : ''}}">
+        <view class="p-dot">{{order.progress >= 2 ? '✓' : '2'}}</view>
+        <text class="p-label">已报到</text>
+      </view>
+      <view class="p-line {{order.progress >= 3 ? 'done' : ''}}"></view>
+      <view class="p-step {{order.progress >= 3 ? 'done' : ''}}">
+        <view class="p-dot">{{order.progress >= 3 ? '✓' : '3'}}</view>
+        <text class="p-label">候诊中</text>
+      </view>
+      <view class="p-line {{order.progress >= 4 ? 'done' : ''}}"></view>
+      <view class="p-step {{order.progress >= 4 ? 'done' : ''}}">
+        <view class="p-dot">{{order.progress >= 4 ? '✓' : '4'}}</view>
+        <text class="p-label">面诊中</text>
+      </view>
+      <view class="p-line {{order.progress >= 5 ? 'done' : ''}}"></view>
+      <view class="p-step {{order.progress >= 5 ? 'done' : ''}}">
+        <view class="p-dot">{{order.progress >= 5 ? '✓' : '5'}}</view>
+        <text class="p-label">已完成</text>
+      </view>
+    </view>
+    <text class="progress-status">当前状态：{{order.statusText}}</text>
+    <text class="progress-time" wx:if="{{order.statusTime}}">{{order.statusTime}}</text>
+  </view>
+
+  <!-- 陪诊员信息 -->
+  <view class="section-card">
+    <text class="card-title">陪诊员信息</text>
+    <view class="escort-info">
+      <view class="ei-avatar">{{order.escortName[0]}}</view>
+      <view class="ei-detail">
+        <text class="ei-name">{{order.escortName}}</text>
+        <text class="ei-data">服务{{order.escortCount}}次 · {{order.escortRating}}分</text>
+      </view>
+      <view class="ei-actions">
+        <view class="ei-btn call" bindtap="callEscort">📞</view>
+        <view class="ei-btn msg" bindtap="msgEscort">💬</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 就诊信息 -->
+  <view class="section-card">
+    <text class="card-title">就诊信息</text>
+    <view class="info-row"><text class="ir-label">服务类型</text><text class="ir-value">{{order.serviceType}}</text></view>
+    <view class="info-row"><text class="ir-label">就诊医院</text><text class="ir-value">{{order.hospital}}</text></view>
+    <view class="info-row"><text class="ir-label">就诊科室</text><text class="ir-value">{{order.dept}}</text></view>
+    <view class="info-row"><text class="ir-label">就诊时间</text><text class="ir-value">{{order.date}} {{order.time}}</text></view>
+    <view class="info-row"><text class="ir-label">就诊人</text><text class="ir-value">{{order.patientName}}</text></view>
+  </view>
+
+  <!-- 费用明细 -->
+  <view class="section-card">
+    <text class="card-title">费用明细</text>
+    <view class="info-row"><text class="ir-label">服务费</text><text class="ir-value">¥{{order.price}}</text></view>
+    <view class="info-row total"><text class="ir-label">合计</text><text class="ir-value">¥{{order.price}}</text></view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="action-bar">
+    <button class="ab-cancel" wx:if="{{order.progress < 2}}" bindtap="cancelOrder">取消订单</button>
+    <button class="ab-cs" bindtap="contactCS">联系客服</button>
+  </view>
+</view>

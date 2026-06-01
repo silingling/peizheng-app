@@ -2,14 +2,41 @@
   "pages": [
     "pages/index/index",
     "pages/patient/patient",
+    "pages/order-detail/order-detail",
     "pages/orders/orders",
+    "pages/profile/profile",
+    "pages/patient-manage/patient-manage",
+    "pages/medical-record/medical-record",
     "pages/escort/escort",
+    "pages/escort-orders/escort-orders",
+    "pages/escort-income/escort-income",
+    "pages/escort-apply/escort-apply",
     "pages/admin/admin"
   ],
   "window": {
     "navigationBarTitleText": "陪诊预约",
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#1aad8a"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#1aad8a",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/orders/orders",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

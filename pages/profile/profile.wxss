@@ -1,0 +1,38 @@
+page { background-color: #f5f7fa; }
+.container { padding: 0; padding-bottom: 40rpx; }
+
+.user-header {
+  background: linear-gradient(135deg, #1aad8a, #20c997);
+  padding: 48rpx 32rpx;
+  display: flex;
+  align-items: center;
+}
+.uh-avatar {
+  width: 100rpx; height: 100rpx; border-radius: 50%; background: rgba(255,255,255,0.25);
+  color: #fff; font-size: 44rpx; display: flex; align-items: center; justify-content: center; margin-right: 24rpx;
+}
+.uh-info { flex: 1; }
+.uh-name { font-size: 36rpx; font-weight: bold; color: #fff; display: block; }
+.uh-phone { font-size: 24rpx; color: rgba(255,255,255,0.8); margin-top: 6rpx; display: block; }
+.uh-badge { background: rgba(255,255,255,0.2); padding: 6rpx 20rpx; font-size: 22rpx; color: #fff; }
+
+.quick-menu { background: #fff; margin-bottom: 2rpx; }
+.qm-item {
+  display: flex; align-items: center; padding: 28rpx 32rpx; border-bottom: 2rpx solid #f0f0f0;
+}
+.qm-icon { font-size: 36rpx; margin-right: 20rpx; }
+.qm-label { flex: 1; font-size: 28rpx; color: #333; }
+.qm-count { font-size: 24rpx; color: #1aad8a; margin-right: 12rpx; }
+.qm-arrow { font-size: 32rpx; color: #ccc; }
+
+.section-title { font-size: 30rpx; font-weight: 600; color: #333; display: block; padding: 24rpx 32rpx 16rpx; }
+
+.order-card { background: #fff; padding: 24rpx 32rpx; margin-bottom: 2rpx; }
+.oc-header { display: flex; justify-content: space-between; margin-bottom: 8rpx; }
+.oc-hospital { font-size: 28rpx; font-weight: 600; color: #333; }
+.oc-status { font-size: 22rpx; padding: 4rpx 14rpx; }
+.oc-status.pending { background: #fff7e6; color: #fa8c16; }
+.oc-status.ongoing { background: #e6f7ff; color: #1890ff; }
+.oc-status.done { background: #f6ffed; color: #52c41a; }
+.oc-info { font-size: 24rpx; color: #999; display: block; }
+.oc-escort { font-size: 24rpx; color: #999; margin-top: 4rpx; display: block; }

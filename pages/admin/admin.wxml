@@ -1,63 +1,84 @@
 <view class="container">
   <view class="admin-tabs">
-    <view class="admin-tab {{adminTab == 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">仪表盘</view>
-    <view class="admin-tab {{adminTab == 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">陪诊员</view>
-    <view class="admin-tab {{adminTab == 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">订单</view>
-    <view class="admin-tab {{adminTab == 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3">用户</view>
+    <view class="admin-tab {{adminTab == 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">📊 仪表盘</view>
+    <view class="admin-tab {{adminTab == 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">👥 陪诊员</view>
+    <view class="admin-tab {{adminTab == 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">📝 订单</view>
+    <view class="admin-tab {{adminTab == 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3">👤 用户</view>
   </view>
 
+  <!-- 仪表盘 -->
   <view wx:if="{{adminTab == 0}}">
     <view class="dashboard-grid">
       <view class="dash-card"><text class="dash-num">28</text><text class="dash-label">今日订单</text><text class="dash-change up">↑15%</text></view>
       <view class="dash-card"><text class="dash-num">¥3,280</text><text class="dash-label">今日收入</text><text class="dash-change up">↑8%</text></view>
-      <view class="dash-card"><text class="dash-num">46</text><text class="dash-label">陪诊员</text><text class="dash-change up">↑5</text></view>
-      <view class="dash-card"><text class="dash-num">168</text><text class="dash-label">总用户</text><text class="dash-change up">↑23</text></view>
+      <view class="dash-card"><text class="dash-num">46</text><text class="dash-label">陪诊员</text><text class="dash-change up">↑5人</text></view>
+      <view class="dash-card"><text class="dash-num">168</text><text class="dash-label">总用户</text><text class="dash-change up">↑23人</text></view>
     </view>
-    <view class="chart-card">
-      <text class="card-title">近7天订单趋势</text>
-      <view class="chart-bars">
-        <view class="bar-item" wx:for="{{chartData}}" wx:key="index">
-          <view class="bar" style="height: {{item.value * 2}}rpx;"></view>
-          <text class="bar-label">{{item.day}}</text>
-        </view>
+
+    <view class="data-section">
+      <text class="ds-title">订单状态分析</text>
+      <view class="ds-chart">
+        <view class="chart-bar"><view class="cb-fill" style="width: 70%;"></view><text class="cb-label">待服务 70%</text></view>
+        <view class="chart-bar"><view class="cb-fill" style="width: 50%; background: #1890ff;"></view><text class="cb-label">服务中 50%</text></view>
+        <view class="chart-bar"><view class="cb-fill" style="width: 30%; background: #52c41a;"></view><text class="cb-label">已完成 30%</text></view>
       </view>
     </view>
-    <view class="rank-card">
-      <text class="card-title">陪诊员服务排行</text>
-      <view class="rank-item" wx:for="{{rankList}}" wx:key="index">
-        <text class="rank-num {{index < 3 ? 'top' : ''}}">{{index + 1}}</text>
-        <text class="rank-name">{{item.name}}</text>
-        <text class="rank-count">{{item.count}}次</text>
-      </view>
+
+    <view class="quick-stats">
+      <view class="qs-card" bindtap="switchTab" data-index="1"><text class="qs-num">3</text><text class="qs-label">待审核陪诊员</text></view>
+      <view class="qs-card" bindtap="switchTab" data-index="2"><text class="qs-num">5</text><text class="qs-label">待处理订单</text></view>
     </view>
   </view>
 
+  <!-- 陪诊员管理 -->
   <view wx:if="{{adminTab == 1}}">
-    <input class="search-input" placeholder="搜索陪诊员" />
+    <view class="search-row">
+      <input class="admin-search" placeholder="🔍 搜索陪诊员" />
+    </view>
     <view class="staff-card" wx:for="{{staffList}}" wx:key="id">
-      <view class="staff-info"><text class="staff-name">{{item.name}}</text><text class="staff-status {{item.status == '已认证' ? 'verified' : 'pending'}}">{{item.status}}</text></view>
-      <text class="staff-detail">服务次数：{{item.count}}次 | 评分：{{item.rating}}分</text>
-      <view class="staff-actions" wx:if="{{item.status == '待审核'}}">
-        <button class="btn-approve" bindtap="approveStaff" data-id="{{item.id}}">通过</button>
-        <button class="btn-reject" bindtap="rejectStaff" data-id="{{item.id}}">拒绝</button>
+      <view class="sc-header">
+        <view class="sc-avatar">{{item.name[0]}}</view>
+        <view class="sc-info"><text class="sc-name">{{item.name}}</text><text class="sc-status {{item.statusClass}}">{{item.status}}</text></view>
+        <text class="sc-rating">{{item.rating}}分</text>
+      </view>
+      <view class="sc-data">
+        <text class="sc-count">服务：{{item.count}}次</text>
+        <text class="sc-area">{{item.area}}</text>
+      </view>
+      <view class="sc-actions" wx:if="{{item.status == '待审核'}}">
+        <button class="btn-approve" bindtap="approveStaff">通过</button>
+        <button class="btn-reject" bindtap="rejectStaff">拒绝</button>
       </view>
     </view>
   </view>
 
+  <!-- 订单管理 -->
   <view wx:if="{{adminTab == 2}}">
-    <view class="order-card" wx:for="{{allOrders}}" wx:key="id">
-      <view class="order-header"><text>#{{item.id}}</text><text class="order-status {{item.statusClass}}">{{item.statusText}}</text></view>
-      <text class="order-detail">{{item.hospital}} - {{item.dept}} - {{item.date}}</text>
-      <text class="order-detail">患者：{{item.patient}} | 陪诊员：{{item.escort}}</text>
+    <view class="data-section">
+      <view class="order-card" wx:for="{{allOrders}}" wx:key="id">
+        <view class="oc-header2">
+          <text class="oc-id">#{{item.id}}</text>
+          <text class="oc-status {{item.statusClass}}">{{item.statusText}}</text>
+        </view>
+        <text class="oc-detail">{{item.hospital}} · {{item.dept}} · {{item.date}}</text>
+        <text class="oc-detail">患者：{{item.patient}} | 陪诊员：{{item.escort}}</text>
+        <text class="oc-detail">金额：¥{{item.price}}</text>
+      </view>
     </view>
   </view>
 
+  <!-- 用户管理 -->
   <view wx:if="{{adminTab == 3}}">
-    <input class="search-input" placeholder="搜索用户" />
+    <view class="search-row">
+      <input class="admin-search" placeholder="🔍 搜索用户" />
+    </view>
     <view class="user-card" wx:for="{{userList}}" wx:key="id">
-      <text class="user-name">{{item.name}}</text>
-      <text class="user-phone">{{item.phone}}</text>
-      <text class="user-orders">{{item.orders}}次预约</text>
+      <view class="uc-avatar">{{item.name[0]}}</view>
+      <view class="uc-info">
+        <text class="uc-name">{{item.name}}</text>
+        <text class="uc-phone">{{item.phone}}</text>
+      </view>
+      <text class="uc-orders">{{item.orders}}次预约</text>
     </view>
   </view>
 </view>

@@ -1,0 +1,44 @@
+page { background-color: #f5f7fa; }
+.container { padding: 20rpx 0; padding-bottom: 140rpx; }
+
+/* 进度卡片 */
+.progress-card { background: #fff; padding: 32rpx 24rpx; margin-bottom: 2rpx; }
+.progress-steps { display: flex; align-items: center; justify-content: center; }
+.p-step { text-align: center; }
+.p-dot {
+  width: 44rpx; height: 44rpx; border-radius: 50%; background: #ddd; color: #fff; font-size: 24rpx;
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 8rpx;
+}
+.p-step.done .p-dot { background: #1aad8a; }
+.p-label { font-size: 22rpx; color: #999; }
+.p-step.done .p-label { color: #1aad8a; }
+.p-line { width: 40rpx; height: 4rpx; background: #ddd; margin-bottom: 36rpx; }
+.p-line.done { background: #1aad8a; }
+.progress-status { font-size: 26rpx; color: #1aad8a; display: block; text-align: center; margin-top: 16rpx; }
+.progress-time { font-size: 22rpx; color: #999; display: block; text-align: center; margin-top: 4rpx; }
+
+/* 通用卡片 */
+.section-card { background: #fff; padding: 24rpx; margin-bottom: 2rpx; }
+.card-title { font-size: 30rpx; font-weight: 600; color: #333; display: block; margin-bottom: 16rpx; }
+.info-row { display: flex; padding: 12rpx 0; }
+.ir-label { font-size: 26rpx; color: #999; width: 140rpx; }
+.ir-value { font-size: 26rpx; color: #333; flex: 1; }
+.info-row.total { border-top: 2rpx solid #f0f0f0; margin-top: 8rpx; padding-top: 16rpx; }
+.info-row.total .ir-value { font-size: 32rpx; font-weight: bold; color: #ff4d4f; }
+
+/* 陪诊员信息 */
+.escort-info { display: flex; align-items: center; }
+.ei-avatar { width: 72rpx; height: 72rpx; border-radius: 50%; background: #1aad8a; color: #fff; font-size: 32rpx; display: flex; align-items: center; justify-content: center; margin-right: 16rpx; }
+.ei-detail { flex: 1; }
+.ei-name { font-size: 28rpx; font-weight: 600; color: #333; display: block; }
+.ei-data { font-size: 22rpx; color: #999; margin-top: 4rpx; display: block; }
+.ei-actions { display: flex; gap: 12rpx; }
+.ei-btn { width: 60rpx; height: 60rpx; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28rpx; }
+.ei-btn.call { background: #e8faf0; }
+.ei-btn.msg { background: #e6f7ff; }
+
+/* 底部操作 */
+.action-bar { position: fixed; bottom: 0; left: 0; right: 0; display: flex; gap: 16rpx; padding: 16rpx 24rpx; background: #fff; border-top: 2rpx solid #f0f0f0; }
+.ab-cancel { flex: 1; background: #fff; color: #ff4d4f; border: 2rpx solid #ddd; height: 72rpx; line-height: 72rpx; font-size: 26rpx; }
+.ab-cs { flex: 1; background: #1aad8a; color: #fff; height: 72rpx; line-height: 72rpx; font-size: 26rpx; }
+button::after { border: none; }

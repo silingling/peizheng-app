@@ -1,59 +1,47 @@
 page { background-color: #f5f7fa; }
-.container { padding: 20rpx 0; }
-.stats-card {
-  background: linear-gradient(135deg, #1aad8a, #20c997);
-  padding: 30rpx;
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 2rpx;
-}
-.stat-item { text-align: center; }
-.stat-num { font-size: 40rpx; font-weight: bold; color: #fff; display: block; }
-.stat-label { font-size: 24rpx; color: rgba(255,255,255,0.85); margin-top: 8rpx; display: block; }
-.remind-card {
-  background: #fff7e6;
-  padding: 24rpx;
-  display: flex;
-  align-items: center;
-  margin-bottom: 2rpx;
-}
-.remind-icon { font-size: 36rpx; margin-right: 16rpx; }
+.container { padding: 20rpx 0; padding-bottom: 40rpx; }
+
+/* 统计卡片 */
+.stats-card { display: flex; background: linear-gradient(135deg, #1aad8a, #20c997); padding: 28rpx 0; margin-bottom: 2rpx; }
+.stat-item { flex: 1; text-align: center; }
+.stat-num { font-size: 36rpx; font-weight: bold; color: #fff; display: block; }
+.stat-label { font-size: 22rpx; color: rgba(255,255,255,0.85); margin-top: 4rpx; display: block; }
+
+.remind-card { background: #fff7e6; padding: 24rpx; display: flex; align-items: center; margin-bottom: 2rpx; }
+.remind-icon { font-size: 32rpx; margin-right: 12rpx; }
 .remind-text { flex: 1; font-size: 28rpx; color: #d46b08; }
 .remind-arrow { font-size: 36rpx; color: #d46b08; }
-.quick-actions {
-  display: flex;
-  gap: 0;
-  margin-bottom: 20rpx;
-}
-.action-item {
-  flex: 1;
-  background: #fff;
-  padding: 24rpx;
-  text-align: center;
-}
-.action-icon { font-size: 48rpx; display: block; }
-.action-name { font-size: 26rpx; color: #333; margin-top: 12rpx; display: block; }
-.section-title {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: #333;
-  display: block;
-  margin-bottom: 20rpx;
-  padding: 0 24rpx;
-}
-.grab-card {
-  background: #fff;
-  padding: 24rpx;
-  margin-bottom: 2rpx;
-  border-bottom: 2rpx solid #f0f0f0;
-}
-.grab-header { display: flex; justify-content: space-between; margin-bottom: 12rpx; }
-.grab-hospital { font-size: 30rpx; font-weight: 600; color: #333; }
-.grab-dept { font-size: 24rpx; color: #1aad8a; background: #e8faf0; padding: 4rpx 16rpx; }
-.grab-body { margin-bottom: 16rpx; }
-.grab-time { font-size: 26rpx; color: #666; display: block; }
-.grab-patient { font-size: 26rpx; color: #999; margin-top: 4rpx; display: block; }
+
+/* 快捷操作 */
+.quick-actions { display: flex; background: #fff; margin-bottom: 2rpx; }
+.action-item { flex: 1; padding: 24rpx 0; text-align: center; }
+.action-icon { font-size: 44rpx; display: block; }
+.action-name { font-size: 24rpx; color: #333; margin-top: 8rpx; display: block; }
+
+/* 今日服务 */
+.today-card { background: #fff; padding: 24rpx; margin-bottom: 20rpx; }
+.today-title { font-size: 30rpx; font-weight: 600; color: #333; display: block; margin-bottom: 16rpx; }
+.today-order { display: flex; align-items: center; padding: 16rpx 0; border-bottom: 2rpx solid #f0f0f0; }
+.to-time { font-size: 26rpx; color: #1aad8a; font-weight: 600; width: 140rpx; }
+.to-info { flex: 1; }
+.to-hospital { font-size: 28rpx; color: #333; display: block; }
+.to-patient { font-size: 22rpx; color: #999; margin-top: 2rpx; display: block; }
+.to-status { font-size: 22rpx; padding: 4rpx 14rpx; }
+.to-status.pending { background: #fff7e6; color: #fa8c16; }
+.to-status.ongoing { background: #e6f7ff; color: #1890ff; }
+
+.section-title { font-size: 32rpx; font-weight: 600; color: #333; display: block; margin-bottom: 16rpx; padding: 0 24rpx; }
+
+.grab-card { background: #fff; padding: 24rpx; margin-bottom: 2rpx; }
+.grab-header { display: flex; justify-content: space-between; margin-bottom: 10rpx; }
+.grab-hospital { font-size: 28rpx; font-weight: 600; color: #333; }
+.grab-dept { font-size: 22rpx; color: #1aad8a; background: #e8faf0; padding: 4rpx 16rpx; }
+.grab-body { margin-bottom: 12rpx; }
+.grab-time { font-size: 24rpx; color: #666; display: block; }
+.grab-patient { font-size: 24rpx; color: #999; margin-top: 4rpx; display: block; }
 .grab-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 16rpx; border-top: 2rpx solid #f0f0f0; }
+.gf-left { display: flex; align-items: baseline; gap: 12rpx; }
 .grab-price { font-size: 36rpx; font-weight: bold; color: #ff4d4f; }
-.btn-grab { background: #1aad8a; color: #fff; font-size: 26rpx; height: 60rpx; line-height: 60rpx; padding: 0 40rpx; }
+.grab-distance { font-size: 22rpx; color: #999; }
+.btn-grab { background: #1aad8a; color: #fff; font-size: 26rpx; height: 60rpx; line-height: 60rpx; padding: 0 36rpx; }
 button::after { border: none; }

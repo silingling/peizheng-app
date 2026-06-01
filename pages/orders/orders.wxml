@@ -6,7 +6,7 @@
     <view class="tab {{tab == 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3">已完成</view>
   </view>
 
-  <view class="empty" wx:if="{{orders.length == 0}}">
+  <view class="empty" wx:if="{{filteredOrders.length == 0}}">
     <text class="empty-icon">📋</text>
     <text class="empty-text">暂无订单</text>
     <text class="empty-desc">去首页预约陪诊服务吧</text>
@@ -14,24 +14,19 @@
   </view>
 
   <view class="order-list" wx:else>
-    <view class="order-card" wx:for="{{orders}}" wx:key="id">
+    <view class="order-card" wx:for="{{filteredOrders}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
       <view class="order-header">
-        <text class="order-hospital">{{item.hospital}}</text>
+        <view class="oh-left">
+          <text class="order-hospital">{{item.hospital}}</text>
+          <text class="order-id">#{{item.id}}</text>
+        </view>
         <text class="order-status {{item.statusClass}}">{{item.statusText}}</text>
       </view>
       <view class="order-body">
-        <view class="order-info">
-          <text class="info-label">科室</text>
-          <text class="info-value">{{item.dept}}</text>
-        </view>
-        <view class="order-info">
-          <text class="info-label">时间</text>
-          <text class="info-value">{{item.date}} {{item.time}}</text>
-        </view>
-        <view class="order-info">
-          <text class="info-label">陪诊员</text>
-          <text class="info-value">{{item.escort}}</text>
-        </view>
+        <view class="order-info"><text class="info-label">科室</text><text class="info-value">{{item.dept}}</text></view>
+        <view class="order-info"><text class="info-label">时间</text><text class="info-value">{{item.date}} {{item.time}}</text></view>
+        <view class="order-info"><text class="info-label">陪诊员</text><text class="info-value">{{item.escort}}</text></view>
+        <view class="order-info" wx:if="{{item.serviceType}}"><text class="info-label">服务</text><text class="info-value">{{item.serviceType}}</text></view>
       </view>
     </view>
   </view>
