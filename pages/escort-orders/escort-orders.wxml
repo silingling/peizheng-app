@@ -5,9 +5,8 @@
     <van-tab title="已完成"></van-tab>
   </van-tabs>
 
-  <van-empty wx:if="{{orders.length == 0}}" description="暂无订单" />
-
-  <van-cell wx:for="{{orders}}" wx:key="id" wx:else center>
+  <block wx:if="{{orders.length > 0}}">
+    <van-cell wx:for="{{orders}}" wx:key="id" center>
     <view slot="title">
       <text>{{item.hospital}} · {{item.dept}}</text>
       <van-tag size="mini" type="{{item.statusClass == 'ongoing' ? 'primary' : item.statusClass == 'done' ? 'success' : 'warning'}}" style="margin-left:8rpx;">{{item.statusText}}</van-tag>
@@ -18,4 +17,6 @@
       <van-button wx:if="{{tab == 1}}" type="success" size="mini" bind:click="completeService">完成</van-button>
     </view>
   </van-cell>
+  </block>
+  <van-empty wx:else description="暂无订单" />
 </view>
