@@ -28,7 +28,7 @@
       <van-cell title="{{userName}}（本人）" label="{{userPhone}}" bind:click="selectSelf">
         <van-icon slot="right-icon" name="success" color="#07c160" wx:if="{{patientType == 'self'}}" />
       </van-cell>
-      <van-cell wx:for="{{familyPatients}}" wx:key="id" title="{{item.name}}（{{item.relation}}）" label="{{item.phone}}" data-index="{{idx}}" bind:click="selectFamily">
+      <van-cell wx:for="{{familyPatients}}" wx:key="id" title="{{item.name}}（{{item.relation}}）" label="{{item.phone}}" data-index="{{index}}" bind:click="selectFamily">
         <van-icon slot="right-icon" name="success" color="#07c160" wx:if="{{patientType == idx}}" />
       </van-cell>
       <van-cell title="+ 添加就诊人" title-class="add-title" bind:click="addPatient" />
